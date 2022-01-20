@@ -150,7 +150,6 @@ export class UserService {
         email,
       },
     });
-
     return !!user;
   }
 
