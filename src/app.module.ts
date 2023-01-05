@@ -5,12 +5,11 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UserModule } from './user/user.module';
 
-console.log(process.env);
 @Module({
   imports: [
     UserModule,
     ConfigModule.forRoot({
-      envFilePath: process.env.NODE_ENV === 'dev' ? '.dev.env' : '.prod.env',
+      envFilePath: `${__dirname}/../.${process.env.NODE_ENV}.env`,
       isGlobal: true,
     }),
     TypeOrmModule.forRoot({
