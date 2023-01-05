@@ -19,7 +19,7 @@ import { UserModule } from './user/user.module';
       username: process.env.DATABASE_USERNAME,
       password: process.env.DATABASE_PASSWORD,
       database: 'greeny',
-      entities: [],
+      entities: [`${__dirname}/**/*.entity{.ts,.js}`],
       synchronize: true,
     }),
   ],
