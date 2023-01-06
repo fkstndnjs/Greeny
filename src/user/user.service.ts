@@ -15,8 +15,6 @@ import * as bcrypt from 'bcrypt';
 import { LoginDto } from './dto/login.dto';
 import { AuthService } from '../auth/auth.service';
 
-console.log(process.env.BCRYPT_SALT_ROUNDS);
-
 @Injectable()
 export class UserService {
   constructor(

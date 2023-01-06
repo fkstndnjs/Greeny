@@ -18,5 +18,3 @@ import { ConfigModule } from '@nestjs/config';
   exports: [UserService],
 })
 export class UserModule {}
-
-console.log(process.env);
