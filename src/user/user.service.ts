@@ -4,9 +4,9 @@ import { DataSource, Repository } from 'typeorm';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { User } from './entities/user.entity';
-import uuid from 'uuid';
+import * as uuid from 'uuid';
 import { EmailService } from '../email/email.service';
-import bcrypt from 'bcrypt';
+import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class UserService {
@@ -25,7 +25,6 @@ export class UserService {
     }
 
     const signupVerifyToken = uuid.v1();
-
     const hashedPassword = await bcrypt.hash(
       password,
       parseInt(process.env.BCRYPT_SALT_ROUNDS),
