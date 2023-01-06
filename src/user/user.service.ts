@@ -1,4 +1,9 @@
-import { ConflictException, Injectable } from '@nestjs/common';
+import {
+  ConflictException,
+  Injectable,
+  NotFoundException,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { DataSource, Repository } from 'typeorm';
 import { CreateUserDto } from './dto/create-user.dto';
@@ -7,6 +12,10 @@ import { User } from './entities/user.entity';
 import * as uuid from 'uuid';
 import { EmailService } from '../email/email.service';
 import * as bcrypt from 'bcrypt';
+import { LoginDto } from './dto/login.dto';
+import { AuthService } from '../auth/auth.service';
+
+console.log(process.env.BCRYPT_SALT_ROUNDS);
 
 @Injectable()
 export class UserService {
@@ -14,6 +23,7 @@ export class UserService {
     @InjectRepository(User) private userRepository: Repository<User>,
     private dataSource: DataSource,
     private emailService: EmailService,
+    private authService: AuthService,
   ) {}
 
   async createUser(body: CreateUserDto) {
@@ -37,7 +47,29 @@ export class UserService {
       nickname,
       signupVerifyToken,
     );
-    await this.sendMemberJoinEmail(email, signupVerifyToken);
+    return await this.sendMemberJoinEmail(email, signupVerifyToken);
+  }
+
+  async login(body: LoginDto) {
+    const { email, password } = body;
+
+    const user = await this.userRepository.findOneOrFail({
+      where: {
+        email,
+      },
+    });
+
+    if (!user) {
+      throw new UnauthorizedException('이메일 혹은 비밀번호가 틀렸습니다.');
+    }
+
+    const isCorrectPassword = await bcrypt.compare(password, user.password);
+
+    if (!isCorrectPassword) {
+      throw new UnauthorizedException('이메일 혹은 비밀번호가 틀렸습니다.');
+    }
+
+    return this.authService.login(user.id);
   }
 
   private async saveUser(
@@ -68,10 +100,15 @@ export class UserService {
     return !!user;
   }
 
-  private async sendMemberJoinEmail(
-    email: string,
-    signupVerifyToken: string,
-  ): Promise<void> {
-    await this.emailService.sendSignUpMail(email, signupVerifyToken);
+  private async sendMemberJoinEmail(email: string, signupVerifyToken: string) {
+    return await this.emailService.sendSignUpMail(email, signupVerifyToken);
+  }
+
+  async findById(id: number) {
+    return await this.userRepository.findOne({
+      where: {
+        id,
+      },
+    });
   }
 }

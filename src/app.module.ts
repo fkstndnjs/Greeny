@@ -6,10 +6,8 @@ import { AppService } from './app.service';
 import { UserModule } from './user/user.module';
 import { EmailModule } from './email/email.module';
 import { AuthModule } from './auth/auth.module';
-
 @Module({
   imports: [
-    UserModule,
     ConfigModule.forRoot({
       envFilePath: `${__dirname}/../.${process.env.NODE_ENV}.env`,
       isGlobal: true,
@@ -24,6 +22,7 @@ import { AuthModule } from './auth/auth.module';
       entities: [`${__dirname}/**/*.entity{.ts,.js}`],
       synchronize: true,
     }),
+    UserModule,
     EmailModule,
     AuthModule,
   ],
