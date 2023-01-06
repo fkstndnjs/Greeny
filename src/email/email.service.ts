@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import Mail from 'nodemailer/lib/mailer';
 import * as nodemailer from 'nodemailer';
+import { MailOptions } from 'nodemailer/lib/json-transport';
 
 @Injectable()
 export class EmailService {
@@ -23,13 +24,19 @@ export class EmailService {
     const baseUrl = process.env.BASE_URL;
     const url = `${baseUrl}/users/email-verify?signupVerifyToken=${signupVerifyToken}`;
 
-    const mailOptions = {
+    const mailOptions: MailOptions = {
       to: email,
-      from: 'Greeny',
-      sender: 'Greeny',
-      subject: '테스트 가입 인증 메일',
+      subject: 'Greeny 가입 인증 메일',
       html: `<form action="${url}" method="POST">
-    <button>가입확인</button>
+    <button style="  background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 10px;">가입확인</button>
         </form>
     `,
     };
