@@ -24,7 +24,7 @@ export class EmailService {
     message: string;
   }> {
     const baseUrl = process.env.BASE_URL;
-    const url = `${baseUrl}/users/email-verify?signupVerifyToken=${signupVerifyToken}`;
+    const url = `${baseUrl}/user/email-verify?signupVerifyToken=${signupVerifyToken}`;
 
     const mailOptions: MailOptions = {
       to: email,
