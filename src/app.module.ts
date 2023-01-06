@@ -4,6 +4,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UserModule } from './user/user.module';
+import { EmailModule } from './email/email.module';
 
 @Module({
   imports: [
@@ -22,6 +23,7 @@ import { UserModule } from './user/user.module';
       entities: [`${__dirname}/**/*.entity{.ts,.js}`],
       synchronize: true,
     }),
+    EmailModule,
   ],
   controllers: [AppController],
   providers: [AppService],
