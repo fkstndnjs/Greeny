@@ -20,6 +20,6 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
       throw new UnauthorizedException('유저 정보가 존재하지 않습니다');
     }
 
-    return { id: users.id };
+    return users;
   }
 }
