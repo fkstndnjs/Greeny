@@ -17,10 +17,7 @@ export class EmailService {
     });
   }
 
-  async sendSignUpMail(
-    email: string,
-    signupVerifyToken: string,
-  ): Promise<void> {
+  async sendSignUpMail(email: string, signupVerifyToken: string) {
     const baseUrl = process.env.BASE_URL;
     const url = `${baseUrl}/users/email-verify?signupVerifyToken=${signupVerifyToken}`;
 
@@ -42,5 +39,7 @@ export class EmailService {
     };
 
     await this.transporter.sendMail(mailOptions);
+
+    return { message: '가입 인증 메일이 전송되었습니다.' };
   }
 }
