@@ -3,6 +3,7 @@ import { NestFactory } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import * as expressBasicAuth from 'express-basic-auth';
 import { AppModule } from './app.module';
+import { HttpExceptionFilter } from './common/filter/http-exception/http-exception.filter';
 import { SuccessInterceptor } from './common/interceptor/success/success.interceptor';
 
 async function bootstrap() {
@@ -13,8 +14,8 @@ async function bootstrap() {
       transform: true,
     }),
   );
-
   app.useGlobalInterceptors(new SuccessInterceptor());
+  app.useGlobalFilters(new HttpExceptionFilter());
 
   app.use(
     ['/swagger-api'],
