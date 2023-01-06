@@ -1,6 +1,7 @@
 import {
   ConflictException,
   Injectable,
+  NotFoundException,
   UnauthorizedException,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -67,6 +68,22 @@ export class UserService {
 
     if (!isCorrectPassword) {
       throw new UnauthorizedException('이메일 혹은 비밀번호가 틀렸습니다.');
+    }
+
+    return this.authService.login(user.id);
+  }
+
+  async verifyEmail(signupVerifyToken: string): Promise<{
+    token: string;
+  }> {
+    const user = await this.userRepository.findOne({
+      where: {
+        signupVerifyToken,
+      },
+    });
+
+    if (!user) {
+      throw new NotFoundException('유저가 존재하지 않습니다.');
     }
 
     return this.authService.login(user.id);
