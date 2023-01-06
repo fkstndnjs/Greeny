@@ -17,7 +17,12 @@ export class EmailService {
     });
   }
 
-  async sendSignUpMail(email: string, signupVerifyToken: string) {
+  async sendSignUpMail(
+    email: string,
+    signupVerifyToken: string,
+  ): Promise<{
+    message: string;
+  }> {
     const baseUrl = process.env.BASE_URL;
     const url = `${baseUrl}/users/email-verify?signupVerifyToken=${signupVerifyToken}`;
 
