@@ -16,7 +16,10 @@ export class EmailService {
     });
   }
 
-  async sendSignUpMail(email: string, signupVerifyToken: string) {
+  async sendSignUpMail(
+    email: string,
+    signupVerifyToken: string,
+  ): Promise<void> {
     const baseUrl = process.env.BASE_URL;
     const url = `${baseUrl}/users/email-verify?signupVerifyToken=${signupVerifyToken}`;
 
@@ -31,6 +34,6 @@ export class EmailService {
     `,
     };
 
-    return await this.transporter.sendMail(mailOptions);
+    await this.transporter.sendMail(mailOptions);
   }
 }
