@@ -24,7 +24,9 @@ export class UserService {
     private authService: AuthService,
   ) {}
 
-  async createUser(body: CreateUserDto) {
+  async createUser(body: CreateUserDto): Promise<{
+    message: string;
+  }> {
     const { name, password, email, nickname } = body;
 
     const userExist = await this.checkUserExistByEmail(email);
@@ -48,7 +50,9 @@ export class UserService {
     return await this.sendMemberJoinEmail(email, signupVerifyToken);
   }
 
-  async login(body: LoginDto) {
+  async login(body: LoginDto): Promise<{
+    token: string;
+  }> {
     const { email, password } = body;
 
     const user = await this.userRepository.findOneOrFail({
@@ -98,11 +102,16 @@ export class UserService {
     return !!user;
   }
 
-  private async sendMemberJoinEmail(email: string, signupVerifyToken: string) {
+  private async sendMemberJoinEmail(
+    email: string,
+    signupVerifyToken: string,
+  ): Promise<{
+    message: string;
+  }> {
     return await this.emailService.sendSignUpMail(email, signupVerifyToken);
   }
 
-  async findById(id: number) {
+  async findById(id: number): Promise<User> {
     return await this.userRepository.findOne({
       where: {
         id,

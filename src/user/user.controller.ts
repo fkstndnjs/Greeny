@@ -19,12 +19,16 @@ export class UserController {
   constructor(private readonly userService: UserService) {}
 
   @Post('signup')
-  async createUser(@Body() body: CreateUserDto) {
+  async createUser(@Body() body: CreateUserDto): Promise<{
+    message: string;
+  }> {
     return this.userService.createUser(body);
   }
 
   @Post('login')
-  async login(@Body() body: LoginDto) {
+  async login(@Body() body: LoginDto): Promise<{
+    token: string;
+  }> {
     return this.userService.login(body);
   }
 }
