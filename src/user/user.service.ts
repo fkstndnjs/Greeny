@@ -12,4 +12,14 @@ export class UserService {
   ) {}
 
   createUser(createUserDto: CreateUserDto) {}
+
+  private async checkUserExistByEmail(email: string): Promise<boolean> {
+    const user = await this.userRepository.findOne({
+      where: {
+        email,
+      },
+    });
+
+    return !!user;
+  }
 }
