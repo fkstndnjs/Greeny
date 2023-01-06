@@ -9,7 +9,6 @@ async function bootstrap() {
     .setTitle('Greeny')
     .setDescription('Greeny 백엔드 API 문서')
     .setVersion('1.0.0')
-    .addTag('app')
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('swagger-api', app, document);
