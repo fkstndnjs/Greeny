@@ -1,9 +1,10 @@
-import { Controller, Post, Body, Query } from '@nestjs/common';
+import { Controller, Post, Body, Query, ParseBoolPipe } from '@nestjs/common';
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { ApiTags } from '@nestjs/swagger';
 import { LoginDto } from './dto/login.dto';
 import { VerifyEmailDto } from './dto/verifyEmail.dto';
+import { FindEmailDto } from 'src/user/dto/findIdByEmail.dto';
 
 @ApiTags('user')
 @Controller('user')
@@ -24,10 +25,13 @@ export class UserController {
     return this.userService.login(body);
   }
 
-  // @Post('id')
-  // async findEmail(@Body() body: FindEmailDto){
-  //   return this.userService.findEmail(body);
-  // }
+  @Post('id')
+  async findIdByEmail(
+    @Body() body: FindEmailDto,
+    @Query('isFull', ParseBoolPipe) isFull: boolean,
+  ) {
+    return this.userService.findIdByEmail(body, isFull);
+  }
 
   // @Post('pw')
   // async findPassword(@Query() query: VerifyEmailDto): Promise<{

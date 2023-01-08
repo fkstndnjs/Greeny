@@ -1,3 +1,5 @@
+import { maskWord } from './../utils/maskWord';
+import { FindEmailDto } from './dto/findIdByEmail.dto';
 import {
   ConflictException,
   Injectable,
@@ -30,7 +32,7 @@ export class UserService {
 
     const userExist = await this.checkUserExistByEmail(email);
     if (userExist) {
-      throw new ConflictException('이미 가입된 계정입니다.');
+      throw new ConflictException('이미 가입된 계정입니다');
     }
 
     const hashedPassword = await bcrypt.hash(
@@ -55,16 +57,41 @@ export class UserService {
     });
 
     if (!user) {
-      throw new UnauthorizedException('아이디 혹은 비밀번호가 틀렸습니다.');
+      throw new UnauthorizedException('아이디 혹은 비밀번호가 틀렸습니다');
     }
 
     const isCorrectPassword = await bcrypt.compare(password, user.password);
 
     if (!isCorrectPassword) {
-      throw new UnauthorizedException('아이디 혹은 비밀번호가 틀렸습니다.');
+      throw new UnauthorizedException('아이디 혹은 비밀번호가 틀렸습니다');
     }
 
     return this.authService.login(user.id);
+  }
+
+  async findIdByEmail(body: FindEmailDto, isFull: boolean) {
+    const { name, email } = body;
+
+    const user = await this.userRepository.findOne({
+      where: {
+        name,
+        email,
+      },
+    });
+
+    if (!user) {
+      throw new UnauthorizedException(
+        '입력하신 정보로 가입 된 회원 아이디는 존재하지 않습니다',
+      );
+    }
+
+    if (isFull) {
+      await this.emailService.sendMail(email, user.userId);
+    }
+
+    return {
+      id: maskWord(user.userId),
+    };
   }
 
   private async saveUser(
@@ -93,15 +120,6 @@ export class UserService {
     });
 
     return !!user;
-  }
-
-  private async sendMemberJoinEmail(
-    email: string,
-    signupVerifyToken: string,
-  ): Promise<{
-    message: string;
-  }> {
-    return await this.emailService.sendSignUpMail(email, signupVerifyToken);
   }
 
   async findById(id: number): Promise<User> {

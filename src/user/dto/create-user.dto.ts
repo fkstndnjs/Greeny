@@ -19,7 +19,7 @@ export class CreateUserDto {
   @IsEmail(
     {},
     {
-      message: '이메일 형식에 맞지 않습니다',
+      message: '이메일 항목이 이메일 형식이 아닙니다',
     },
   )
   email: string;
