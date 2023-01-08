@@ -27,15 +27,19 @@ export class UserController {
   }
 
   @Post('id')
-  async findIdByEmail(
+  async findId(
     @Body() body: FindEmailDto,
     @Query('isFull', ParseBoolPipe) isFull: boolean,
-  ) {
-    return this.userService.findIdByEmail(body, isFull);
+  ): Promise<{
+    message: string;
+  }> {
+    return this.userService.findId(body, isFull);
   }
 
   @Post('pw')
-  async findPassword(@Body() body: FindPasswordDto) {
+  async findPassword(@Body() body: FindPasswordDto): Promise<{
+    message: string;
+  }> {
     return this.userService.findPassword(body);
   }
 }

@@ -65,7 +65,12 @@ export class UserService {
     return this.authService.login(user.id);
   }
 
-  async findIdByEmail(body: FindEmailDto, isFull: boolean) {
+  async findId(
+    body: FindEmailDto,
+    isFull: boolean,
+  ): Promise<{
+    message: string;
+  }> {
     const { name, email } = body;
 
     const user = await this.userRepository.findOne({
@@ -83,14 +88,19 @@ export class UserService {
 
     if (isFull) {
       await this.emailService.sendMail(email, user.userId);
+      return {
+        message: `회원님의 이메일로 아이디가 전송되었습니다`,
+      };
     }
 
     return {
-      id: maskWord(user.userId),
+      message: `회원님의 아이디는 ${maskWord(user.userId)}입니다`,
     };
   }
 
-  async findPassword(body: FindPasswordDto) {
+  async findPassword(body: FindPasswordDto): Promise<{
+    message: string;
+  }> {
     const { name, email, userId } = body;
 
     const user = await this.userRepository.findOne({
@@ -108,6 +118,10 @@ export class UserService {
     }
 
     await this.emailService.sendMail(email, user.password);
+
+    return {
+      message: '회원님의 이메일로 비밀번호가 전송되었습니다.',
+    };
   }
 
   private async saveUser(
