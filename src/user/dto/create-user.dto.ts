@@ -1,4 +1,10 @@
-import { IsEmail, IsString, MaxLength, MinLength } from 'class-validator';
+import {
+  IsDefined,
+  IsEmail,
+  IsString,
+  MaxLength,
+  MinLength,
+} from 'class-validator';
 
 export class CreateUserDto {
   @IsString()
@@ -17,6 +23,15 @@ export class CreateUserDto {
     },
   )
   email: string;
+
+  @IsString()
+  @MinLength(1, {
+    message: '아이디는 최소 1글자 이상 작성해주세요',
+  })
+  @MaxLength(20, {
+    message: '아이디는 최대 20글자까지 가능합니다',
+  })
+  userId: string;
 
   @IsString()
   @MinLength(10, {

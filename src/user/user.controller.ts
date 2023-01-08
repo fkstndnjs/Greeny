@@ -24,12 +24,17 @@ export class UserController {
     return this.userService.login(body);
   }
 
-  @Post('email-verify')
-  async verifyEmail(@Query() query: VerifyEmailDto): Promise<{
-    token: string;
-  }> {
-    const { signupVerifyToken } = query;
+  // @Post('id')
+  // async findEmail(@Body() body: FindEmailDto){
+  //   return this.userService.findEmail(body);
+  // }
 
-    return await this.userService.verifyEmail(signupVerifyToken);
-  }
+  // @Post('pw')
+  // async findPassword(@Query() query: VerifyEmailDto): Promise<{
+  //   token: string;
+  // }> {
+  //   const { signupVerifyToken } = query;
+
+  //   return await this.userService.verifyEmail(signupVerifyToken);
+  // }
 }

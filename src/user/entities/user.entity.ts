@@ -24,10 +24,12 @@ export class User extends BaseEntity {
   email: string;
 
   @Column({
+    length: 20,
+  })
+  userId: string;
+
+  @Column({
     length: 100,
   })
   password: string;
-
-  @Column({ length: 60 })
-  signupVerifyToken: string;
 }

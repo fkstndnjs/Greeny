@@ -26,7 +26,7 @@ export class UserService {
   async signUp(body: CreateUserDto): Promise<{
     email: string;
   }> {
-    const { name, password, email, nickname } = body;
+    const { name, userId, password, email, nickname } = body;
 
     const userExist = await this.checkUserExistByEmail(email);
     if (userExist) {
@@ -38,7 +38,7 @@ export class UserService {
       parseInt(process.env.BCRYPT_SALT_ROUNDS),
     );
 
-    await this.saveUser(name, email, hashedPassword, nickname);
+    await this.saveUser(name, email, userId, hashedPassword, nickname);
 
     return { email };
   }
@@ -46,38 +46,22 @@ export class UserService {
   async login(body: LoginDto): Promise<{
     token: string;
   }> {
-    const { email, password } = body;
+    const { userId, password } = body;
 
-    const user = await this.userRepository.findOneOrFail({
+    const user = await this.userRepository.findOne({
       where: {
-        email,
+        userId,
       },
     });
 
     if (!user) {
-      throw new UnauthorizedException('이메일 혹은 비밀번호가 틀렸습니다.');
+      throw new UnauthorizedException('아이디 혹은 비밀번호가 틀렸습니다.');
     }
 
     const isCorrectPassword = await bcrypt.compare(password, user.password);
 
     if (!isCorrectPassword) {
-      throw new UnauthorizedException('이메일 혹은 비밀번호가 틀렸습니다.');
-    }
-
-    return this.authService.login(user.id);
-  }
-
-  async verifyEmail(signupVerifyToken: string): Promise<{
-    token: string;
-  }> {
-    const user = await this.userRepository.findOne({
-      where: {
-        signupVerifyToken,
-      },
-    });
-
-    if (!user) {
-      throw new NotFoundException('유저가 존재하지 않습니다.');
+      throw new UnauthorizedException('아이디 혹은 비밀번호가 틀렸습니다.');
     }
 
     return this.authService.login(user.id);
@@ -86,6 +70,7 @@ export class UserService {
   private async saveUser(
     name: string,
     email: string,
+    userId: string,
     password: string,
     nickname: string,
   ): Promise<void> {
@@ -93,6 +78,7 @@ export class UserService {
       const user = new User();
       user.name = name;
       user.email = email;
+      user.userId = userId;
       user.password = password;
       user.nickname = nickname;
       await manager.save(user);
