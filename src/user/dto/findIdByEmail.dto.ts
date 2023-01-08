@@ -1,0 +1,14 @@
+import { IsEmail, IsString } from 'class-validator';
+
+export class FindEmailDto {
+  @IsString()
+  name: string;
+
+  @IsEmail(
+    {},
+    {
+      message: '이메일 항목이 이메일 형식이 아닙니다',
+    },
+  )
+  email: string;
+}
