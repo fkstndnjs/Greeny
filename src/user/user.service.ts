@@ -1,3 +1,4 @@
+import { FindPasswordDto } from './dto/findPassword.dto';
 import { maskWord } from './../utils/maskWord';
 import { FindEmailDto } from './dto/findIdByEmail.dto';
 import {
@@ -35,12 +36,7 @@ export class UserService {
       throw new ConflictException('이미 가입된 계정입니다');
     }
 
-    const hashedPassword = await bcrypt.hash(
-      password,
-      parseInt(process.env.BCRYPT_SALT_ROUNDS),
-    );
-
-    await this.saveUser(name, email, userId, hashedPassword, nickname);
+    await this.saveUser(name, email, userId, password, nickname);
 
     return { email };
   }
@@ -60,7 +56,7 @@ export class UserService {
       throw new UnauthorizedException('아이디 혹은 비밀번호가 틀렸습니다');
     }
 
-    const isCorrectPassword = await bcrypt.compare(password, user.password);
+    const isCorrectPassword = password === user.password;
 
     if (!isCorrectPassword) {
       throw new UnauthorizedException('아이디 혹은 비밀번호가 틀렸습니다');
@@ -92,6 +88,26 @@ export class UserService {
     return {
       id: maskWord(user.userId),
     };
+  }
+
+  async findPassword(body: FindPasswordDto) {
+    const { name, email, userId } = body;
+
+    const user = await this.userRepository.findOne({
+      where: {
+        name,
+        email,
+        userId,
+      },
+    });
+
+    if (!user) {
+      throw new UnauthorizedException(
+        '입력하신 정보로 가입 된 회원 아이디는 존재하지 않습니다',
+      );
+    }
+
+    await this.emailService.sendMail(email, user.password);
   }
 
   private async saveUser(

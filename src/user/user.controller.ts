@@ -5,6 +5,7 @@ import { ApiTags } from '@nestjs/swagger';
 import { LoginDto } from './dto/login.dto';
 import { VerifyEmailDto } from './dto/verifyEmail.dto';
 import { FindEmailDto } from 'src/user/dto/findIdByEmail.dto';
+import { FindPasswordDto } from 'src/user/dto/findPassword.dto';
 
 @ApiTags('user')
 @Controller('user')
@@ -33,12 +34,8 @@ export class UserController {
     return this.userService.findIdByEmail(body, isFull);
   }
 
-  // @Post('pw')
-  // async findPassword(@Query() query: VerifyEmailDto): Promise<{
-  //   token: string;
-  // }> {
-  //   const { signupVerifyToken } = query;
-
-  //   return await this.userService.verifyEmail(signupVerifyToken);
-  // }
+  @Post('pw')
+  async findPassword(@Body() body: FindPasswordDto) {
+    return this.userService.findPassword(body);
+  }
 }
