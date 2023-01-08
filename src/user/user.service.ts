@@ -23,8 +23,8 @@ export class UserService {
     private authService: AuthService,
   ) {}
 
-  async createUser(body: CreateUserDto): Promise<{
-    message: string;
+  async signUp(body: CreateUserDto): Promise<{
+    email: string;
   }> {
     const { name, password, email, nickname } = body;
 
@@ -33,20 +33,14 @@ export class UserService {
       throw new ConflictException('이미 가입된 계정입니다.');
     }
 
-    const signupVerifyToken = uuid.v1();
     const hashedPassword = await bcrypt.hash(
       password,
       parseInt(process.env.BCRYPT_SALT_ROUNDS),
     );
 
-    await this.saveUser(
-      name,
-      email,
-      hashedPassword,
-      nickname,
-      signupVerifyToken,
-    );
-    return await this.sendMemberJoinEmail(email, signupVerifyToken);
+    await this.saveUser(name, email, hashedPassword, nickname);
+
+    return { email };
   }
 
   async login(body: LoginDto): Promise<{
@@ -94,7 +88,6 @@ export class UserService {
     email: string,
     password: string,
     nickname: string,
-    signupVerifyToken: string,
   ): Promise<void> {
     this.dataSource.transaction(async (manager) => {
       const user = new User();
@@ -102,7 +95,6 @@ export class UserService {
       user.email = email;
       user.password = password;
       user.nickname = nickname;
-      user.signupVerifyToken = signupVerifyToken;
       await manager.save(user);
     });
   }

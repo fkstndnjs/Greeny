@@ -11,10 +11,10 @@ export class UserController {
   constructor(private readonly userService: UserService) {}
 
   @Post('signup')
-  async createUser(@Body() body: CreateUserDto): Promise<{
-    message: string;
+  async signUp(@Body() body: CreateUserDto): Promise<{
+    email: string;
   }> {
-    return this.userService.createUser(body);
+    return this.userService.signUp(body);
   }
 
   @Post('login')
