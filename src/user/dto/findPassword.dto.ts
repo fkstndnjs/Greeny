@@ -1,9 +1,12 @@
+import { ApiProperty } from '@nestjs/swagger';
 import { IsDefined, IsEmail, IsString } from 'class-validator';
 
 export class FindPasswordDto {
+  @ApiProperty({ description: '이름', example: 'fkstndnjs@naver.com' })
   @IsString()
   name: string;
 
+  @ApiProperty({ description: '이메일', example: 'fkstndnjs@naver.com' })
   @IsEmail(
     {},
     {
@@ -12,6 +15,7 @@ export class FindPasswordDto {
   )
   email: string;
 
+  @ApiProperty({ description: '아이디', example: 'fkstndnjs' })
   @IsString()
   userId: string;
 }
