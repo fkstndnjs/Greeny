@@ -3,7 +3,6 @@ import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { ApiTags } from '@nestjs/swagger';
 import { LoginDto } from './dto/login.dto';
-import { VerifyEmailDto } from './dto/verifyEmail.dto';
 import { FindEmailDto } from 'src/user/dto/findIdByEmail.dto';
 import { FindPasswordDto } from 'src/user/dto/findPassword.dto';
 
