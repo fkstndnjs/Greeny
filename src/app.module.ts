@@ -8,6 +8,7 @@ import { EmailModule } from './email/email.module';
 import { AuthModule } from './auth/auth.module';
 import { ThrottlerModule, ThrottlerGuard } from '@nestjs/throttler';
 import { APP_GUARD } from '@nestjs/core';
+import { AwsService } from './aws/aws.service';
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -39,6 +40,7 @@ import { APP_GUARD } from '@nestjs/core';
       useClass: ThrottlerGuard,
     },
     AppService,
+    AwsService,
   ],
 })
 export class AppModule {}
