@@ -1,9 +1,18 @@
-import { Controller, Get, Req, UseGuards } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Req,
+  UploadedFile,
+  UseGuards,
+  UseInterceptors,
+} from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { AppService } from './app.service';
 import { JwtAuthGuard } from './auth/jwt/jwt.guard';
 import { CurrentUser } from './common/decorator/currentUser';
 import { User } from './user/entities/user.entity';
+import { FileInterceptor } from '@nestjs/platform-express';
 
 @ApiTags('app')
 @UseGuards(JwtAuthGuard)
@@ -14,5 +23,11 @@ export class AppController {
   @Get()
   getHello(@CurrentUser() user: User): string {
     return this.appService.getHello();
+  }
+
+  @Post('upload')
+  @UseInterceptors(FileInterceptor('file'))
+  async uploadImage(@UploadedFile() file: Express.Multer.File) {
+    console.log(file);
   }
 }
