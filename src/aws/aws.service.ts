@@ -34,4 +34,20 @@ export class AwsService {
       throw new BadRequestException(`File upload failed : ${error}`);
     }
   }
+
+  async deleteS3Object(key: string): Promise<{ success: true }> {
+    try {
+      await this.S3.deleteObject({
+        Bucket: this.S3_BUCKET_NAME,
+        Key: key,
+      }).promise();
+      return { success: true };
+    } catch (error) {
+      throw new BadRequestException(`Failed to delete file : ${error}`);
+    }
+  }
+
+  public getAwsS3FileUrl(objectKey: string) {
+    return `https://${this.S3_BUCKET_NAME}.s3.amazonaws.com/${objectKey}`;
+  }
 }
