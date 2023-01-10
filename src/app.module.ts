@@ -9,6 +9,7 @@ import { AuthModule } from './auth/auth.module';
 import { ThrottlerModule, ThrottlerGuard } from '@nestjs/throttler';
 import { APP_GUARD } from '@nestjs/core';
 import { AwsService } from './aws/aws.service';
+import { AdminModule } from './admin/admin.module';
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -32,6 +33,7 @@ import { AwsService } from './aws/aws.service';
     UserModule,
     EmailModule,
     AuthModule,
+    AdminModule,
   ],
   controllers: [AppController],
   providers: [
