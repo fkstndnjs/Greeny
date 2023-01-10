@@ -5,6 +5,8 @@ import { ApiTags } from '@nestjs/swagger';
 import { LoginDto } from './dto/login.dto';
 import { FindEmailDto } from 'src/user/dto/findIdByEmail.dto';
 import { FindPasswordDto } from 'src/user/dto/findPassword.dto';
+import { Roles } from '../common/decorator/roles';
+import { RoleType } from '../common/enum/RoleType';
 
 @ApiTags('user')
 @Controller('user')

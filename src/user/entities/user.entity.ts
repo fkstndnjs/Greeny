@@ -32,4 +32,9 @@ export class User extends BaseEntity {
     length: 100,
   })
   password: string;
+
+  @Column({
+    length: 100,
+  })
+  role: string;
 }

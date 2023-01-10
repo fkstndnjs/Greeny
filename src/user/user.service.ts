@@ -16,6 +16,7 @@ import { EmailService } from '../email/email.service';
 import * as bcrypt from 'bcrypt';
 import { LoginDto } from './dto/login.dto';
 import { AuthService } from '../auth/auth.service';
+import { RoleType } from '../common/enum/RoleType';
 
 @Injectable()
 export class UserService {
@@ -138,6 +139,7 @@ export class UserService {
       user.userId = userId;
       user.password = password;
       user.nickname = nickname;
+      user.role = RoleType.USER;
       await manager.save(user);
     });
   }

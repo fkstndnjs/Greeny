@@ -15,9 +15,13 @@ import { CurrentUser } from './common/decorator/currentUser';
 import { User } from './user/entities/user.entity';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { AwsService } from './aws/aws.service';
+import { Roles } from './common/decorator/roles';
+import { RoleType } from './common/enum/RoleType';
+import { RolesGuard } from './auth/role/role.guard';
 
 @ApiTags('app')
-@UseGuards(JwtAuthGuard)
+@UseGuards(JwtAuthGuard, RolesGuard)
+@Roles(RoleType.ADMIN)
 @Controller()
 export class AppController {
   constructor(
