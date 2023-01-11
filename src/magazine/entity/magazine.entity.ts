@@ -12,7 +12,7 @@ import { MagazineArticle } from './magazineArticle.entity';
 @Entity('magazine')
 export class Magazine extends BaseEntity {
   @PrimaryGeneratedColumn({ type: 'bigint' })
-  id: bigint;
+  id: number;
 
   @Column({
     length: 255,

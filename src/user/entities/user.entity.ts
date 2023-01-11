@@ -7,7 +7,7 @@ export class User extends BaseEntity {
   @PrimaryGeneratedColumn({
     type: 'bigint',
   })
-  id: bigint;
+  id: number;
 
   @Column({
     length: 30,

@@ -7,7 +7,7 @@ export class MagazineArticle extends BaseEntity {
   @PrimaryGeneratedColumn({
     type: 'bigint',
   })
-  id: bigint;
+  id: number;
 
   @Column({
     length: 255,
