@@ -35,6 +35,6 @@ async function bootstrap() {
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('swagger-api', app, document);
 
-  await app.listen(process.env.NODE_ENV === 'dev' ? 8000 : 80);
+  await app.listen(8000);
 }
 bootstrap();
