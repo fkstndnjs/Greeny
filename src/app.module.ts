@@ -9,7 +9,6 @@ import { AuthModule } from './auth/auth.module';
 import { ThrottlerModule, ThrottlerGuard } from '@nestjs/throttler';
 import { APP_GUARD } from '@nestjs/core';
 import { AwsService } from './aws/aws.service';
-import { AdminModule } from './admin/admin.module';
 import { BannerModule } from './banner/banner.module';
 import { ChallengeModule } from './challenge/challenge.module';
 import { DailylookModule } from './dailylook/dailylook.module';
@@ -38,7 +37,6 @@ import { MagazineModule } from './magazine/magazine.module';
     UserModule,
     EmailModule,
     AuthModule,
-    AdminModule,
     BannerModule,
     ChallengeModule,
     DailylookModule,
