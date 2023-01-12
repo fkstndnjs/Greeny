@@ -13,7 +13,6 @@ import { BannerModule } from './banner/banner.module';
 import { ChallengeModule } from './challenge/challenge.module';
 import { DailylookModule } from './dailylook/dailylook.module';
 import { EventModule } from './event/event.module';
-import { MagazineModule } from './magazine/magazine.module';
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -41,7 +40,6 @@ import { MagazineModule } from './magazine/magazine.module';
     ChallengeModule,
     DailylookModule,
     EventModule,
-    MagazineModule,
   ],
   controllers: [AppController],
   providers: [
