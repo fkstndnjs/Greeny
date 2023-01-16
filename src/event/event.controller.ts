@@ -6,7 +6,11 @@ import {
   UseGuards,
   UseInterceptors,
 } from '@nestjs/common';
-import { FileFieldsInterceptor } from '@nestjs/platform-express';
+import {
+  AnyFilesInterceptor,
+  FileFieldsInterceptor,
+  FilesInterceptor,
+} from '@nestjs/platform-express';
 import { ApiTags } from '@nestjs/swagger';
 import { JwtAuthGuard } from '../auth/jwt/jwt.guard';
 import { RolesGuard } from '../auth/role/role.guard';
@@ -25,18 +29,21 @@ export class EventController {
   @Roles(RoleType.ADMIN)
   @UseInterceptors(
     FileFieldsInterceptor([
-      { name: 'eventThumbnail', maxCount: 1 },
-      { name: 'eventWayThumbnail', maxCount: 1 },
+      { name: 'thumbnail', maxCount: 1 },
+      { name: 'mainThumbnail', maxCount: 1 },
     ]),
   )
   async createEvent(
-    @Body() body: CreateEventDto,
+    @Body()
+    body: {
+      data: string;
+    },
     @UploadedFiles()
     files: {
-      thumbnail?: Express.Multer.File[];
-      mainThumbnail?: Express.Multer.File[];
+      thumbnail: Express.Multer.File[];
+      mainThumbnail: Express.Multer.File[];
     },
   ) {
-    await this.eventService.createEvent(body);
+    await this.eventService.createEvent(JSON.parse(body.data), files);
   }
 }

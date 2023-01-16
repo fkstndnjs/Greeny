@@ -1,9 +1,5 @@
 export class CreateEventDto {
-  thumbnail: string;
-
-  mainThumbnail: string;
-
-  eventWay: EventWayDto;
+  eventWay: EventWayDto[];
 }
 
 class EventWayDto {

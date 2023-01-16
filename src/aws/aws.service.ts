@@ -16,20 +16,40 @@ export class AwsService {
     this.S3_BUCKET_NAME = this.configService.get('AWS_S3_BUCKET_NAME');
   }
 
-  async uploadEventToS3(folder: string, file: Express.Multer.File) {
+  async uploadEventToS3(files: {
+    thumbnail: Express.Multer.File[];
+    mainThumbnail: Express.Multer.File[];
+  }) {
     try {
-      const key = `${folder}/${Date.now()}_${path.basename(
-        file.originalname,
+      let thumbnailKey: string;
+      let mainThumbnailKey: string;
+      const date = Date.now();
+
+      thumbnailKey = `event/${date}/${path.basename(
+        files.thumbnail[0].originalname,
       )}`.replace(/ /g, '');
 
-      const s3Object = await this.S3.putObject({
+      await this.S3.putObject({
         Bucket: this.S3_BUCKET_NAME,
-        Key: key,
-        Body: file.buffer,
+        Key: thumbnailKey,
+        Body: files.thumbnail[0].buffer,
         ACL: 'public-read',
-        ContentType: file.mimetype,
+        ContentType: files.thumbnail[0].mimetype,
       }).promise();
-      return { key, s3Object, contentType: file.mimetype };
+
+      mainThumbnailKey = `event/${date}/main_${path.basename(
+        files.mainThumbnail[0].originalname,
+      )}`.replace(/ /g, '');
+
+      await this.S3.putObject({
+        Bucket: this.S3_BUCKET_NAME,
+        Key: mainThumbnailKey,
+        Body: files.mainThumbnail[0].buffer,
+        ACL: 'public-read',
+        ContentType: files.mainThumbnail[0].mimetype,
+      }).promise();
+
+      return { thumbnailKey, mainThumbnailKey };
     } catch (error) {
       throw new BadRequestException(`File upload failed : ${error}`);
     }
