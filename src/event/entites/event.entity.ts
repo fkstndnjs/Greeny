@@ -14,7 +14,9 @@ export class Event extends BaseEntity {
   })
   mainThumbnail: string;
 
-  @Column()
+  @Column({
+    default: false,
+  })
   status: boolean;
 
   @OneToMany(() => EventWay, (EventWay) => EventWay.event)

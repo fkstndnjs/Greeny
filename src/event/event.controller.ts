@@ -16,6 +16,7 @@ import { RolesGuard } from '../auth/role/role.guard';
 import { Roles } from '../common/decorator/roles';
 import { PaginationDto } from '../common/dto/pagination.dto';
 import { RoleType } from '../common/enum/RoleType';
+import { CreateDto } from './dto/create.dto';
 import { EventService } from './event.service';
 
 @ApiTags('event')
@@ -34,9 +35,7 @@ export class EventController {
   )
   async createEvent(
     @Body()
-    body: {
-      data: string;
-    },
+    body: CreateDto,
     @UploadedFiles()
     files: {
       thumbnail: Express.Multer.File[];

@@ -30,6 +30,7 @@ export class EventService {
       const { thumbnailKey, mainThumbnailKey } =
         await this.awsService.uploadEventToS3(files);
 
+      event.status = body.status;
       event.thumbnail = thumbnailKey;
       event.mainThumbnail = mainThumbnailKey;
       const createdEvent = await manager.save(event);
