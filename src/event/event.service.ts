@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { DataSource, Repository } from 'typeorm';
 import { AwsService } from '../aws/aws.service';
+import { Pagination, PaginationDto } from '../common/dto/pagination.dto';
 import { CreateEventDto } from './dto/createEvent.dto';
 import { Event } from './entites/event.entity';
 import { EventWay } from './entites/eventWay.entity';
@@ -9,10 +10,10 @@ import { EventWay } from './entites/eventWay.entity';
 @Injectable()
 export class EventService {
   constructor(
-    private dataSource: DataSource,
     @InjectRepository(Event) private eventRepository: Repository<Event>,
     @InjectRepository(EventWay)
     private eventWayRepository: Repository<EventWay>,
+    private dataSource: DataSource,
     private awsService: AwsService,
   ) {}
 
@@ -44,5 +45,25 @@ export class EventService {
         }),
       );
     });
+  }
+
+  async getEvents(pagination: PaginationDto) {
+    const [events, total] = await this.eventRepository
+      .createQueryBuilder('event')
+      .leftJoinAndSelect('event.eventWay', 'eventWay')
+      .orderBy('event.createdAt', 'DESC')
+      .skip(pagination.getOffset())
+      .take(pagination.getLimit())
+      .getManyAndCount();
+
+    const items = events.map((event) => {
+      return {
+        ...event,
+        thumbnail: this.awsService.getAwsS3FileUrl(event.thumbnail),
+        mainThumbnail: this.awsService.getAwsS3FileUrl(event.mainThumbnail),
+      };
+    });
+
+    return new Pagination(total, pagination.getLimit(), pagination.page, items);
   }
 }

@@ -1,7 +1,10 @@
 import {
   Body,
   Controller,
+  DefaultValuePipe,
+  Get,
   Post,
+  Query,
   UploadedFiles,
   UseGuards,
   UseInterceptors,
@@ -11,6 +14,7 @@ import { ApiTags } from '@nestjs/swagger';
 import { JwtAuthGuard } from '../auth/jwt/jwt.guard';
 import { RolesGuard } from '../auth/role/role.guard';
 import { Roles } from '../common/decorator/roles';
+import { PaginationDto } from '../common/dto/pagination.dto';
 import { RoleType } from '../common/enum/RoleType';
 import { EventService } from './event.service';
 
@@ -40,5 +44,10 @@ export class EventController {
     },
   ) {
     await this.eventService.createEvent(JSON.parse(body.data), files);
+  }
+
+  @Get()
+  async getEvents(@Query() pagination: PaginationDto) {
+    return await this.eventService.getEvents(pagination);
   }
 }
