@@ -6,17 +6,12 @@ import {
   UseGuards,
   UseInterceptors,
 } from '@nestjs/common';
-import {
-  AnyFilesInterceptor,
-  FileFieldsInterceptor,
-  FilesInterceptor,
-} from '@nestjs/platform-express';
+import { FileFieldsInterceptor } from '@nestjs/platform-express';
 import { ApiTags } from '@nestjs/swagger';
 import { JwtAuthGuard } from '../auth/jwt/jwt.guard';
 import { RolesGuard } from '../auth/role/role.guard';
 import { Roles } from '../common/decorator/roles';
 import { RoleType } from '../common/enum/RoleType';
-import { CreateEventDto } from './dto/createEvent.dto';
 import { EventService } from './event.service';
 
 @ApiTags('event')
