@@ -25,7 +25,6 @@ export class EventService {
   ) {
     this.dataSource.transaction(async (manager) => {
       const event = new Event();
-      const eventWay = new EventWay();
 
       const { thumbnailKey, mainThumbnailKey } =
         await this.awsService.uploadEventToS3(files);
@@ -36,6 +35,8 @@ export class EventService {
 
       await Promise.all(
         body.eventWay.map(async (way) => {
+          const eventWay = new EventWay();
+
           eventWay.order = way.order;
           eventWay.text = way.text;
           eventWay.event = createdEvent;
