@@ -4,11 +4,6 @@ import { Event } from './event.entity';
 
 @Entity('eventWay')
 export class EventWay extends BaseEntity {
-  @PrimaryGeneratedColumn({
-    type: 'bigint',
-  })
-  id: number;
-
   @Column()
   order: number;
 
