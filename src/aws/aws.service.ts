@@ -16,6 +16,25 @@ export class AwsService {
     this.S3_BUCKET_NAME = this.configService.get('AWS_S3_BUCKET_NAME');
   }
 
+  async uploadEventToS3(folder: string, file: Express.Multer.File) {
+    try {
+      const key = `${folder}/${Date.now()}_${path.basename(
+        file.originalname,
+      )}`.replace(/ /g, '');
+
+      const s3Object = await this.S3.putObject({
+        Bucket: this.S3_BUCKET_NAME,
+        Key: key,
+        Body: file.buffer,
+        ACL: 'public-read',
+        ContentType: file.mimetype,
+      }).promise();
+      return { key, s3Object, contentType: file.mimetype };
+    } catch (error) {
+      throw new BadRequestException(`File upload failed : ${error}`);
+    }
+  }
+
   async uploadFileToS3(folder: string, file: Express.Multer.File) {
     try {
       const key = `${folder}/${Date.now()}_${path.basename(

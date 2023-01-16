@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { DataSource, Repository } from 'typeorm';
+import { AwsService } from '../aws/aws.service';
 import { CreateEventDto } from './dto/createEvent.dto';
 import { Event } from './entites/event.entity';
 import { EventWay } from './entites/eventWay.entity';
@@ -12,6 +13,7 @@ export class EventService {
     @InjectRepository(Event) private eventRepository: Repository<Event>,
     @InjectRepository(EventWay)
     private eventWayRepository: Repository<EventWay>,
+    private awsService: AwsService,
   ) {}
 
   async createEvent(body: CreateEventDto) {

@@ -8,11 +8,11 @@ import { EmailModule } from './email/email.module';
 import { AuthModule } from './auth/auth.module';
 import { ThrottlerModule, ThrottlerGuard } from '@nestjs/throttler';
 import { APP_GUARD } from '@nestjs/core';
-import { AwsService } from './aws/aws.service';
 import { BannerModule } from './banner/banner.module';
 import { ChallengeModule } from './challenge/challenge.module';
 import { DailylookModule } from './dailylook/dailylook.module';
 import { EventModule } from './event/event.module';
+import { AwsModule } from './aws/aws.module';
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -40,6 +40,7 @@ import { EventModule } from './event/event.module';
     ChallengeModule,
     DailylookModule,
     EventModule,
+    AwsModule,
   ],
   controllers: [AppController],
   providers: [
@@ -48,7 +49,6 @@ import { EventModule } from './event/event.module';
       useClass: ThrottlerGuard,
     },
     AppService,
-    AwsService,
   ],
 })
 export class AppModule {}
