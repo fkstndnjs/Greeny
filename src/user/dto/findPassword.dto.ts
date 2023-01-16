@@ -2,7 +2,7 @@ import { ApiProperty } from '@nestjs/swagger';
 import { IsDefined, IsEmail, IsString } from 'class-validator';
 
 export class FindPasswordDto {
-  @ApiProperty({ description: '이름', example: 'fkstndnjs@naver.com' })
+  @ApiProperty({ description: '이름', example: '유석현' })
   @IsString()
   name: string;
 
