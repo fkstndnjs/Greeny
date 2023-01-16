@@ -3,11 +3,6 @@ import { BaseEntity } from '../../common/entity/baseEntity';
 
 @Entity('user')
 export class User extends BaseEntity {
-  @PrimaryGeneratedColumn({
-    type: 'bigint',
-  })
-  id: number;
-
   @Column({
     length: 30,
   })
