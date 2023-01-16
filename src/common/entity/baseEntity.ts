@@ -1,9 +1,19 @@
-import { CreateDateColumn, UpdateDateColumn } from 'typeorm';
+import {
+  CreateDateColumn,
+  Entity,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm';
 
 export abstract class BaseEntity {
   @CreateDateColumn({ type: 'timestamp' })
-  created_at: Date;
+  createdAt: Date;
 
   @UpdateDateColumn({ type: 'timestamp' })
-  updated_at: Date;
+  updatedAt: Date;
+
+  @PrimaryGeneratedColumn({
+    type: 'bigint',
+  })
+  id: number;
 }
