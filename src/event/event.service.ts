@@ -13,6 +13,7 @@ export class EventService {
     @InjectRepository(EventWay)
     private eventWayRepository: Repository<EventWay>,
   ) {}
+
   async createEvent(body: CreateEventDto) {
     this.dataSource.transaction(async (manager) => {
       const event = new Event();
