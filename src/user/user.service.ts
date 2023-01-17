@@ -117,7 +117,6 @@ export class UserService {
         '입력하신 정보로 가입 된 회원 아이디는 존재하지 않습니다',
       );
     }
-
     await this.emailService.sendMail(email, user.password);
 
     return {
