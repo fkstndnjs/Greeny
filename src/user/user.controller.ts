@@ -1,18 +1,24 @@
 import { Controller, Post, Body, Query, ParseBoolPipe } from '@nestjs/common';
-import { UserService } from './user.service';
+import { UserService } from './user.service';``
 import { CreateUserDto } from './dto/create-user.dto';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { LoginDto } from './dto/login.dto';
 import { FindEmailDto } from 'src/user/dto/findIdByEmail.dto';
 import { FindPasswordDto } from 'src/user/dto/findPassword.dto';
 import { RoleType } from '../common/enum/RoleType';
+import { ApiSuccessResponse } from '../common/decorator/successResponse';
 
 @ApiTags('user')
 @Controller('user')
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
+  @ApiOperation({
+    summary: 'sadf',
+    description: 'aaa',
+  })
   @Post('signup')
+  @ApiSuccessResponse({paginated: false, model: })
   async signUp(@Body() body: CreateUserDto): Promise<{
     email: string;
   }> {
