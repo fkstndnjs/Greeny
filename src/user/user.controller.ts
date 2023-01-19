@@ -14,7 +14,7 @@ export class UserController {
   constructor(private readonly userService: UserService) {}
 
   @ApiOperation({
-    summary: 'sadf',
+    summary: 'sad',
     description: 'aaa',
   })
   @Post('signup')
