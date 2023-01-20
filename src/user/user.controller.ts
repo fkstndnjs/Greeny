@@ -1,5 +1,6 @@
 import { Controller, Post, Body, Query, ParseBoolPipe } from '@nestjs/common';
-import { UserService } from './user.service';``
+import { UserService } from './user.service';
+``;
 import { CreateUserDto } from './dto/create-user.dto';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { LoginDto } from './dto/login.dto';
@@ -18,7 +19,7 @@ export class UserController {
     description: 'aaa',
   })
   @Post('signup')
-  @ApiSuccessResponse({paginated: false, model: })
+  // @ApiSuccessResponse({paginated: false, model:})
   async signUp(@Body() body: CreateUserDto): Promise<{
     email: string;
   }> {
