@@ -10,7 +10,7 @@ import {
   UseInterceptors,
 } from '@nestjs/common';
 import { FileFieldsInterceptor } from '@nestjs/platform-express';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { JwtAuthGuard } from '../auth/jwt/jwt.guard';
 import { RolesGuard } from '../auth/role/role.guard';
 import { Roles } from '../common/decorator/roles';
@@ -27,6 +27,9 @@ export class EventController {
 
   @Post()
   @Roles(RoleType.ADMIN)
+  @ApiOperation({
+    summary: '이벤트 생성',
+  })
   @UseInterceptors(
     FileFieldsInterceptor([
       { name: 'thumbnail', maxCount: 1 },
@@ -46,6 +49,9 @@ export class EventController {
   }
 
   @Get()
+  @ApiOperation({
+    summary: '이벤트 전체 조회',
+  })
   async getEvents(@Query() pagination: PaginationDto) {
     return await this.eventService.getEvents(pagination);
   }
