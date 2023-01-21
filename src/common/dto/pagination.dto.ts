@@ -1,10 +1,19 @@
+import { ApiProperty } from '@nestjs/swagger';
 import { IsNumber, IsOptional } from 'class-validator';
 
 export class PaginationDto {
+  @ApiProperty({
+    description: '페이지',
+    example: 1,
+  })
   @IsOptional()
   @IsNumber()
   page: number = 1;
 
+  @ApiProperty({
+    description: '페이지 당 데이터 갯수',
+    example: 10,
+  })
   @IsOptional()
   @IsNumber()
   limit: number = 30;
