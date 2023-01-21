@@ -1,7 +1,7 @@
 import { Controller, Post, Body, Query, ParseBoolPipe } from '@nestjs/common';
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
-import { ApiOperation, ApiTags } from '@nestjs/swagger';
+import { ApiOperation, ApiQuery, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { LoginDto } from './dto/login.dto';
 import { FindEmailDto } from 'src/user/dto/findIdByEmail.dto';
 import { FindPasswordDto } from 'src/user/dto/findPassword.dto';
@@ -9,6 +9,8 @@ import { RoleType } from '../common/enum/RoleType';
 import { ApiSuccessResponse } from '../common/decorator/successResponse';
 import { SignUpSuccessResponseDto } from 'src/user/dto/signUpSuccessResponse.dto';
 import { LoginSuccessResponseDto } from 'src/user/dto/loginSuccessResponse.dto';
+import { FindIdSuccessResponseDto } from 'src/user/dto/findIdSuccessResponse.dto';
+import { FindIdSuccessResponseDto2 } from 'src/user/dto/findIdSuccessResponse2.dto ';
 
 @ApiTags('user')
 @Controller('user')
@@ -41,6 +43,12 @@ export class UserController {
     summary: '아이디 찾기',
   })
   @Post('id')
+  @ApiSuccessResponse({ paginated: false, model: FindIdSuccessResponseDto })
+  @ApiQuery({
+    name: 'isFull',
+    type: 'boolean',
+    description: 'isFull에 true값을 주면 이메일로 아이디 전체가 전송된다',
+  })
   async findId(
     @Body() body: FindEmailDto,
     @Query('isFull', ParseBoolPipe) isFull: boolean,
