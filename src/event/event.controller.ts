@@ -11,6 +11,7 @@ import {
 } from '@nestjs/common';
 import { FileFieldsInterceptor } from '@nestjs/platform-express';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
+import { ApiSuccessResponse } from 'src/common/decorator/successResponse';
 import { JwtAuthGuard } from '../auth/jwt/jwt.guard';
 import { RolesGuard } from '../auth/role/role.guard';
 import { Roles } from '../common/decorator/roles';
@@ -36,6 +37,7 @@ export class EventController {
       { name: 'mainThumbnail', maxCount: 1 },
     ]),
   )
+  @ApiSuccessResponse({ paginated: false })
   async createEvent(
     @Body()
     body: CreateDto,
@@ -52,6 +54,7 @@ export class EventController {
   @ApiOperation({
     summary: '이벤트 전체 조회',
   })
+  @ApiSuccessResponse({ paginated: true })
   async getEvents(@Query() pagination: PaginationDto) {
     return await this.eventService.getEvents(pagination);
   }
