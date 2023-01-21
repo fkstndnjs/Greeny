@@ -11,6 +11,7 @@ import { SignUpSuccessResponseDto } from 'src/user/dto/signUpSuccessResponse.dto
 import { LoginSuccessResponseDto } from 'src/user/dto/loginSuccessResponse.dto';
 import { FindIdSuccessResponseDto } from 'src/user/dto/findIdSuccessResponse.dto';
 import { FindIdSuccessResponseDto2 } from 'src/user/dto/findIdSuccessResponse2.dto ';
+import { FindPasswordSuccessResponseDto } from 'src/user/dto/findPasswordSuccessResponse.dto';
 
 @ApiTags('user')
 @Controller('user')
@@ -62,6 +63,10 @@ export class UserController {
     summary: '비밀번호 찾기',
   })
   @Post('pw')
+  @ApiSuccessResponse({
+    paginated: false,
+    model: FindPasswordSuccessResponseDto,
+  })
   async findPassword(@Body() body: FindPasswordDto): Promise<{
     message: string;
   }> {
