@@ -10,7 +10,6 @@ import { ThrottlerModule, ThrottlerGuard } from '@nestjs/throttler';
 import { APP_GUARD } from '@nestjs/core';
 import { BannerModule } from './banner/banner.module';
 import { ChallengeModule } from './challenge/challenge.module';
-import { DailylookModule } from './dailylook/dailylook.module';
 import { EventModule } from './event/event.module';
 import { AwsModule } from './aws/aws.module';
 import { DailyLookModule } from './daily-look/daily-look.module';
@@ -39,7 +38,6 @@ import { DailyLookModule } from './daily-look/daily-look.module';
     AuthModule,
     BannerModule,
     ChallengeModule,
-    DailylookModule,
     EventModule,
     AwsModule,
     DailyLookModule,

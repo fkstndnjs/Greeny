@@ -3,9 +3,7 @@ import {
   Controller,
   Get,
   Post,
-  Req,
   UploadedFile,
-  UploadedFiles,
   UseGuards,
   UseInterceptors,
 } from '@nestjs/common';
@@ -14,10 +12,7 @@ import { AppService } from './app.service';
 import { JwtAuthGuard } from './auth/jwt/jwt.guard';
 import { CurrentUser } from './common/decorator/currentUser';
 import { User } from './user/entities/user.entity';
-import {
-  FileFieldsInterceptor,
-  FileInterceptor,
-} from '@nestjs/platform-express';
+import { FileInterceptor } from '@nestjs/platform-express';
 import { AwsService } from './aws/aws.service';
 import { Roles } from './common/decorator/roles';
 import { RoleType } from './common/enum/RoleType';
