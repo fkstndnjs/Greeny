@@ -4,16 +4,13 @@ import { FindEmailDto } from './dto/findIdByEmail.dto';
 import {
   ConflictException,
   Injectable,
-  NotFoundException,
   UnauthorizedException,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { DataSource, Repository } from 'typeorm';
 import { CreateUserDto } from './dto/create-user.dto';
 import { User } from './entities/user.entity';
-import * as uuid from 'uuid';
 import { EmailService } from '../email/email.service';
-import * as bcrypt from 'bcrypt';
 import { LoginDto } from './dto/login.dto';
 import { AuthService } from '../auth/auth.service';
 import { RoleType } from '../common/enum/RoleType';
