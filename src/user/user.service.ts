@@ -137,6 +137,7 @@ export class UserService {
       user.password = password;
       user.nickname = nickname;
       user.role = RoleType.USER;
+
       await manager.save(user);
     });
   }
