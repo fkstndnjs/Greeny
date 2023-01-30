@@ -38,6 +38,7 @@ export class AppController {
   async uploadImage(@UploadedFile() file: Express.Multer.File) {
     return await this.awsService.uploadFileToS3('test', file);
   }
+
   @Post('delete')
   async deleteFile(@Body() body: { key: string }) {
     return this.awsService.deleteS3Object(body.key);
