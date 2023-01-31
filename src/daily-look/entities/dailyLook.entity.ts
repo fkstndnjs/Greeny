@@ -9,7 +9,7 @@ export class DailyLook extends BaseEntity {
   imgUrl: string;
 
   @Column({
-    length: 100,
+    length: 255,
   })
   title: string;
 
