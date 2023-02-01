@@ -94,7 +94,7 @@ export const ApiSuccessResponse = <ResponseDto extends Type<unknown>>({
                           hasNextPage: {
                             type: 'number',
                             example: false,
-                            description: '다음 페이지여부',
+                            description: '다음 페이지 여부',
                           },
                         },
                       },
