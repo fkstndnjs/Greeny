@@ -10,7 +10,7 @@ export abstract class BaseEntity {
   @ApiProperty({
     example: '20',
   })
-  @CreateDateColumn({ type: 'timestamp', precision: 2 })
+  @CreateDateColumn({ type: 'timestamp' })
   createdAt: Date;
 
   @UpdateDateColumn({ type: 'timestamp' })
