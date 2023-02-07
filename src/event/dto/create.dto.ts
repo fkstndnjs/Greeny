@@ -1,21 +1,21 @@
-import { ApiProperty } from '@nestjs/swagger';
+import { ApiProperty, PickType } from '@nestjs/swagger';
+import { Transform, Type } from 'class-transformer';
+import { Event } from '../entites/event.entity';
 
-export class CreateDto {
+export class CreateDto extends PickType(Event, [
+  'startDate',
+  'endDate',
+] as const) {
   @ApiProperty({
-    description: 'body에 담길 데이터를 json string 으로 넘겨준다',
-    example: `{  
-        "status": true,
-        "eventWay": [
-            {
-                "order": 1,
-                "text": "text 1"
-            },
-            {
-                "order": 2,
-                "text": "text 2"
-            }
-        ]
-    }`,
+    type: String,
+    example: 'true',
+    description: '원래는 boolean 타입인데 여기서만 string으로 줘야함',
   })
-  data: string;
+  @Transform(
+    ({ obj }) => {
+      return obj.status === 'true';
+    },
+    { toClassOnly: true },
+  )
+  status: boolean;
 }

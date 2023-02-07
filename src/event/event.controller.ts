@@ -1,7 +1,9 @@
 import {
   Body,
+  ClassSerializerInterceptor,
   Controller,
   Get,
+  HttpStatus,
   Post,
   Query,
   UploadedFiles,
@@ -17,6 +19,7 @@ import { Roles } from '../common/decorator/roles';
 import { PaginationDto } from '../common/dto/pagination.dto';
 import { RoleType } from '../common/enum/RoleType';
 import { CreateDto } from './dto/create.dto';
+import { Event } from './entites/event.entity';
 import { EventService } from './event.service';
 
 @ApiTags('event')
@@ -46,14 +49,14 @@ export class EventController {
       mainThumbnail: Express.Multer.File[];
     },
   ) {
-    await this.eventService.createEvent(JSON.parse(body.data), files);
+    await this.eventService.createEvent(body, files);
   }
 
   @Get()
   @ApiOperation({
     summary: '이벤트 전체 조회',
   })
-  @ApiSuccessResponse({ paginated: true })
+  @ApiSuccessResponse({ paginated: true, model: Event })
   async getEvents(@Query() pagination: PaginationDto) {
     return await this.eventService.getEvents(pagination);
   }

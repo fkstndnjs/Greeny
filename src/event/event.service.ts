@@ -3,22 +3,19 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { DataSource, Repository } from 'typeorm';
 import { AwsService } from '../aws/aws.service';
 import { Pagination, PaginationDto } from '../common/dto/pagination.dto';
-import { CreateEventDto } from './dto/createEvent.dto';
+import { CreateDto } from './dto/create.dto';
 import { Event } from './entites/event.entity';
-import { EventWay } from './entites/eventWay.entity';
 
 @Injectable()
 export class EventService {
   constructor(
     @InjectRepository(Event) private eventRepository: Repository<Event>,
-    @InjectRepository(EventWay)
-    private eventWayRepository: Repository<EventWay>,
     private dataSource: DataSource,
     private awsService: AwsService,
   ) {}
 
   async createEvent(
-    body: CreateEventDto,
+    body: CreateDto,
     files: {
       thumbnail: Express.Multer.File[];
       mainThumbnail: Express.Multer.File[];
@@ -30,28 +27,18 @@ export class EventService {
       const { thumbnailKey, mainThumbnailKey } =
         await this.awsService.uploadEventToS3(files);
 
-      event.status = body.status;
       event.thumbnail = thumbnailKey;
       event.mainThumbnail = mainThumbnailKey;
-      const createdEvent = await manager.save(event);
-
-      await Promise.all(
-        body.eventWay.map(async (way) => {
-          const eventWay = new EventWay();
-
-          eventWay.order = way.order;
-          eventWay.text = way.text;
-          eventWay.event = createdEvent;
-          await manager.save(eventWay);
-        }),
-      );
+      event.status = body.status;
+      event.startDate = body.startDate;
+      event.endDate = body.endDate;
+      await manager.save(event);
     });
   }
 
   async getEvents(pagination: PaginationDto) {
     const [events, total] = await this.eventRepository
       .createQueryBuilder('event')
-      .leftJoinAndSelect('event.eventWay', 'eventWay')
       .orderBy('event.createdAt', 'DESC')
       .skip(pagination.getOffset())
       .take(pagination.getLimit())
