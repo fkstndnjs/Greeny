@@ -32,6 +32,8 @@ export class EventService {
       event.status = body.status;
       event.startDate = body.startDate;
       event.endDate = body.endDate;
+      event.title = body.title;
+
       await manager.save(event);
     });
   }

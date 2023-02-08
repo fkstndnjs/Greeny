@@ -5,6 +5,7 @@ import { Event } from '../entites/event.entity';
 export class CreateDto extends PickType(Event, [
   'startDate',
   'endDate',
+  'title',
 ] as const) {
   @ApiProperty({
     type: String,

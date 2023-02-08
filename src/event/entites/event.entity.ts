@@ -6,6 +6,14 @@ import { BaseEntity } from '../../common/entity/baseEntity';
 @Entity('event')
 export class Event extends BaseEntity {
   @ApiProperty({
+    example: '그리니 챌린지 이벤트',
+  })
+  @Column({
+    length: 255,
+  })
+  title: string;
+
+  @ApiProperty({
     example:
       'https://greeny2023.s3.amazonaws.com/event/1675752939340/sample.png',
   })
