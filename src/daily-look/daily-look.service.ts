@@ -7,6 +7,7 @@ import {
   Repository,
 } from 'typeorm';
 import { AwsService } from '../aws/aws.service';
+import { Pagination, PaginationDto } from '../common/dto/pagination.dto';
 import { User } from '../user/entities/user.entity';
 import { CreateDailyLookDto } from './dto/createDailyLook.dto';
 import { CreateDailyLookTagDto } from './dto/createDailyLookTag.dto';
@@ -47,6 +48,24 @@ export class DailyLookService {
 
       await manager.save(dailyLook);
     });
+  }
+
+  async getAll(pagination: PaginationDto) {
+    const [dailyLooks, total] = await this.dailyLookRepository
+      .createQueryBuilder('dailyLook')
+      .orderBy('dailyLook.createdAt', 'DESC')
+      .skip(pagination.getOffset())
+      .take(pagination.getLimit())
+      .getManyAndCount();
+
+    const items = dailyLooks.map((dailyLook) => {
+      return {
+        ...dailyLook,
+        imgUrl: this.awsService.getAwsS3FileUrl(dailyLook.imgUrl),
+      };
+    });
+
+    return new Pagination(total, pagination.getLimit(), pagination.page, items);
   }
 
   async createTag(body: CreateDailyLookTagDto): Promise<void> {

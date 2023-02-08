@@ -1,7 +1,9 @@
 import {
   Body,
   Controller,
+  Get,
   Post,
+  Query,
   UploadedFile,
   UseGuards,
   UseInterceptors,
@@ -12,10 +14,12 @@ import { JwtAuthGuard } from '../auth/jwt/jwt.guard';
 import { RolesGuard } from '../auth/role/role.guard';
 import { Roles } from '../common/decorator/roles';
 import { ApiSuccessResponse } from '../common/decorator/successResponse';
+import { PaginationDto } from '../common/dto/pagination.dto';
 import { RoleType } from '../common/enum/RoleType';
 import { DailyLookService } from './daily-look.service';
 import { CreateDailyLookDto } from './dto/createDailyLook.dto';
 import { CreateDailyLookTagDto } from './dto/createDailyLookTag.dto';
+import { DailyLook } from './entities/dailyLook.entity';
 
 @ApiTags('데일리룩')
 @UseGuards(JwtAuthGuard, RolesGuard)
@@ -32,6 +36,12 @@ export class DailyLookController {
     @Body() body: CreateDailyLookDto,
   ): Promise<void> {
     await this.dailyLookService.create(file, body);
+  }
+
+  @Get()
+  @ApiSuccessResponse({ paginated: true, model: DailyLook })
+  async getAll(@Query() pagination: PaginationDto) {
+    return await this.dailyLookService.getAll(pagination);
   }
 
   @Post('tag')

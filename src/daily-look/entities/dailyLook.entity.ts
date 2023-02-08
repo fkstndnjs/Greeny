@@ -30,6 +30,9 @@ export class DailyLook extends BaseEntity {
   })
   text: string;
 
+  @ApiProperty({
+    example: 1,
+  })
   @ManyToOne(() => DailyLookTag)
   dailyLookTag: DailyLookTag;
 }
