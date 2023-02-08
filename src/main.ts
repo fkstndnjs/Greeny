@@ -3,6 +3,7 @@ import { NestFactory } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import * as expressBasicAuth from 'express-basic-auth';
 import { AppModule } from './app.module';
+import { EntityNotFoundFilter } from './common/filter/entityNotFoundError/entityNotFoundError.filter';
 import { HttpExceptionFilter } from './common/filter/http-exception/http-exception.filter';
 import { SuccessInterceptor } from './common/interceptor/success/success.interceptor';
 
@@ -15,7 +16,7 @@ async function bootstrap() {
     }),
   );
   app.useGlobalInterceptors(new SuccessInterceptor());
-  app.useGlobalFilters(new HttpExceptionFilter());
+  app.useGlobalFilters(new HttpExceptionFilter(), new EntityNotFoundFilter());
 
   app.use(
     ['/swagger-api'],
