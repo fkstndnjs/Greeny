@@ -55,7 +55,10 @@ export class AwsService {
     }
   }
 
-  async uploadFileToS3(folder: string, file: Express.Multer.File) {
+  async uploadFileToS3(
+    folder: string,
+    file: Express.Multer.File,
+  ): Promise<string> {
     try {
       const key = `${folder}/${Date.now()}_${path.basename(
         file.originalname,
@@ -68,7 +71,8 @@ export class AwsService {
         ACL: 'public-read',
         ContentType: file.mimetype,
       }).promise();
-      return { key, s3Object, contentType: file.mimetype };
+
+      return key;
     } catch (error) {
       throw new BadRequestException(`File upload failed : ${error}`);
     }

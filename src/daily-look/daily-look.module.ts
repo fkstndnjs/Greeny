@@ -7,7 +7,7 @@ import { DailyLookTag } from './entities/dailyLookTag.entity';
 import { AwsModule } from '../aws/aws.module';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([DailyLook, DailyLookTag, AwsModule])],
+  imports: [TypeOrmModule.forFeature([DailyLook, DailyLookTag]), AwsModule],
   controllers: [DailyLookController],
   providers: [DailyLookService],
 })

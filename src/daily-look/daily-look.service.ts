@@ -6,6 +6,7 @@ import {
   QueryFailedError,
   Repository,
 } from 'typeorm';
+import { AwsService } from '../aws/aws.service';
 import { User } from '../user/entities/user.entity';
 import { CreateDailyLookDto } from './dto/createDailyLook.dto';
 import { CreateDailyLookTagDto } from './dto/createDailyLookTag.dto';
@@ -20,15 +21,21 @@ export class DailyLookService {
     @InjectRepository(DailyLookTag)
     private dailyLookTagRepository: Repository<DailyLookTag>,
     private dataSource: DataSource,
+    private awsService: AwsService,
   ) {}
 
-  async create(body: CreateDailyLookDto): Promise<void> {
-    const { imgUrl, text, title, dailyLookTag } = body;
+  async create(
+    file: Express.Multer.File,
+    body: CreateDailyLookDto,
+  ): Promise<void> {
+    const { text, title, dailyLookTag } = body;
 
     const dailyLookTagFromDb =
       await this.dailyLookTagRepository.findOneByOrFail({
         id: Number(dailyLookTag),
       });
+
+    const imgUrl = await this.awsService.uploadFileToS3('dailyLook', file);
 
     this.dataSource.transaction(async (manager) => {
       const dailyLook = new DailyLook();
@@ -45,7 +52,7 @@ export class DailyLookService {
   async createTag(body: CreateDailyLookTagDto): Promise<void> {
     const { name } = body;
 
-    const isDuplicate = this.dailyLookTagRepository.findOneBy({ name });
+    const isDuplicate = await this.dailyLookTagRepository.findOneBy({ name });
     if (isDuplicate) {
       throw new ConflictException();
     }

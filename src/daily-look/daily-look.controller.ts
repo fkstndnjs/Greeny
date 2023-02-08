@@ -1,4 +1,12 @@
-import { Body, Controller, Post, UseGuards } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Post,
+  UploadedFile,
+  UseGuards,
+  UseInterceptors,
+} from '@nestjs/common';
+import { FileInterceptor } from '@nestjs/platform-express';
 import { ApiTags } from '@nestjs/swagger';
 import { JwtAuthGuard } from '../auth/jwt/jwt.guard';
 import { RolesGuard } from '../auth/role/role.guard';
@@ -18,8 +26,12 @@ export class DailyLookController {
   @Post()
   @Roles(RoleType.ADMIN)
   @ApiSuccessResponse({ paginated: false })
-  async create(@Body() body: CreateDailyLookDto): Promise<void> {
-    await this.dailyLookService.create(body);
+  @UseInterceptors(FileInterceptor('file'))
+  async create(
+    @UploadedFile() file: Express.Multer.File,
+    @Body() body: CreateDailyLookDto,
+  ): Promise<void> {
+    await this.dailyLookService.create(file, body);
   }
 
   @Post('tag')
