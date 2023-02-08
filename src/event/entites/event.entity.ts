@@ -6,7 +6,8 @@ import { BaseEntity } from '../../common/entity/baseEntity';
 @Entity('event')
 export class Event extends BaseEntity {
   @ApiProperty({
-    example: 'event/1675752939340/sample.png',
+    example:
+      'https://greeny2023.s3.amazonaws.com/event/1675752939340/sample.png',
   })
   @Column({
     length: 255,
@@ -14,7 +15,8 @@ export class Event extends BaseEntity {
   thumbnail: string;
 
   @ApiProperty({
-    example: 'event/1675752939340/main_sample.png',
+    example:
+      'https://greeny2023.s3.amazonaws.com/event/1675752939340/sample.png',
   })
   @Column({
     length: 255,

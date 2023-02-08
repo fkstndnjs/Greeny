@@ -8,14 +8,20 @@ import {
 
 export abstract class BaseEntity {
   @ApiProperty({
-    example: '20',
+    example: '2023-01-01',
   })
   @CreateDateColumn({ type: 'timestamp' })
   createdAt: Date;
 
+  @ApiProperty({
+    example: '2023-12-31',
+  })
   @UpdateDateColumn({ type: 'timestamp' })
   updatedAt: Date;
 
+  @ApiProperty({
+    example: 1,
+  })
   @PrimaryGeneratedColumn({
     type: 'bigint',
   })
