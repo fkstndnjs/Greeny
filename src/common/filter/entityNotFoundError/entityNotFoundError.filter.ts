@@ -6,7 +6,12 @@ export class EntityNotFoundFilter implements ExceptionFilter {
   catch(exception: EntityNotFoundError, host: ArgumentsHost) {
     const ctx = host.switchToHttp();
     const response = ctx.getResponse();
-    const message = exception.message.replace(/\\/g, '').replace(/\n/g, '');
+    const message = exception.message
+      .replace(/[^a-zA-Z0-9:"{}\s:]/g, '')
+      .replace(/\n/g, '')
+      .replace(/\s+/g, ' ')
+      .replace(/\b(\d+)\b/g, ' $1 ')
+      .replace(/\s+/g, ' ');
 
     console.log(message);
 
