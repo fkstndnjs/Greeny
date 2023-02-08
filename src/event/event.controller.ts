@@ -22,7 +22,7 @@ import { CreateDto } from './dto/create.dto';
 import { Event } from './entites/event.entity';
 import { EventService } from './event.service';
 
-@ApiTags('event')
+@ApiTags('이벤트')
 @UseGuards(JwtAuthGuard, RolesGuard)
 @Controller('event')
 export class EventController {

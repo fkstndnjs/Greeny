@@ -18,7 +18,7 @@ import { Roles } from './common/decorator/roles';
 import { RoleType } from './common/enum/RoleType';
 import { RolesGuard } from './auth/role/role.guard';
 
-@ApiTags('app')
+@ApiTags('앱')
 @UseGuards(JwtAuthGuard, RolesGuard)
 @Roles(RoleType.ADMIN)
 @Controller()

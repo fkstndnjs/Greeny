@@ -13,7 +13,7 @@ import { FindIdSuccessResponseDto } from 'src/user/dto/findIdSuccessResponse.dto
 import { FindIdSuccessResponseDto2 } from 'src/user/dto/findIdSuccessResponse2.dto ';
 import { FindPasswordSuccessResponseDto } from 'src/user/dto/findPasswordSuccessResponse.dto';
 
-@ApiTags('user')
+@ApiTags('유저')
 @Controller('user')
 export class UserController {
   constructor(private readonly userService: UserService) {}
