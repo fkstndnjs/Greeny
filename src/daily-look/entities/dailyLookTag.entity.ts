@@ -8,6 +8,7 @@ export class DailyLookTag extends BaseEntity {
     example: '실천인증',
   })
   @Column({
+    unique: true,
     length: 50,
   })
   name: string;
