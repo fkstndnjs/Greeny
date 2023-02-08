@@ -31,5 +31,5 @@ export class DailyLook extends BaseEntity {
   text: string;
 
   @ManyToOne(() => DailyLookTag)
-  dailyLookTag: bigint;
+  dailyLookTag: DailyLookTag;
 }
