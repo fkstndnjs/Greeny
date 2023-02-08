@@ -3,7 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { DataSource, Repository } from 'typeorm';
 import { AwsService } from '../aws/aws.service';
 import { Pagination, PaginationDto } from '../common/dto/pagination.dto';
-import { CreateDto } from './dto/create.dto';
+import { CreateEventDto } from './dto/createEvent.dto';
 import { Event } from './entites/event.entity';
 
 @Injectable()
@@ -15,7 +15,7 @@ export class EventService {
   ) {}
 
   async createEvent(
-    body: CreateDto,
+    body: CreateEventDto,
     files: {
       thumbnail: Express.Multer.File[];
       mainThumbnail: Express.Multer.File[];

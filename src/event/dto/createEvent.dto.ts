@@ -2,7 +2,7 @@ import { ApiProperty, PickType } from '@nestjs/swagger';
 import { Transform, Type } from 'class-transformer';
 import { Event } from '../entites/event.entity';
 
-export class CreateDto extends PickType(Event, [
+export class CreateEventDto extends PickType(Event, [
   'startDate',
   'endDate',
   'title',

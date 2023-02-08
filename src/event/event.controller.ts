@@ -18,7 +18,7 @@ import { RolesGuard } from '../auth/role/role.guard';
 import { Roles } from '../common/decorator/roles';
 import { PaginationDto } from '../common/dto/pagination.dto';
 import { RoleType } from '../common/enum/RoleType';
-import { CreateDto } from './dto/create.dto';
+import { CreateEventDto } from './dto/createEvent.dto';
 import { Event } from './entites/event.entity';
 import { EventService } from './event.service';
 
@@ -42,7 +42,7 @@ export class EventController {
   @ApiSuccessResponse({ paginated: false })
   async createEvent(
     @Body()
-    body: CreateDto,
+    body: CreateEventDto,
     @UploadedFiles()
     files: {
       thumbnail: Express.Multer.File[];
