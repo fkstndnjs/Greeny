@@ -5,7 +5,6 @@ import { ApiOperation, ApiQuery, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { LoginDto } from './dto/login.dto';
 import { FindEmailDto } from 'src/user/dto/findIdByEmail.dto';
 import { FindPasswordDto } from 'src/user/dto/findPassword.dto';
-import { RoleType } from '../common/enum/RoleType';
 import { ApiSuccessResponse } from '../common/decorator/successResponse';
 import { SignUpSuccessResponseDto } from 'src/user/dto/signUpSuccessResponse.dto';
 import { LoginSuccessResponseDto } from 'src/user/dto/loginSuccessResponse.dto';
