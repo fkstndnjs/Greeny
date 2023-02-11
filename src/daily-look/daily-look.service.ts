@@ -1,14 +1,8 @@
 import { ConflictException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import {
-  DataSource,
-  EntityNotFoundError,
-  QueryFailedError,
-  Repository,
-} from 'typeorm';
+import { DataSource, Repository } from 'typeorm';
 import { AwsService } from '../aws/aws.service';
 import { Pagination, PaginationDto } from '../common/dto/pagination.dto';
-import { User } from '../user/entities/user.entity';
 import { CreateDailyLookDto } from './dto/createDailyLook.dto';
 import { CreateDailyLookTagDto } from './dto/createDailyLookTag.dto';
 import { DailyLook } from './entities/dailyLook.entity';
