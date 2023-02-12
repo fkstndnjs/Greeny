@@ -9,7 +9,7 @@ import {
   UseInterceptors,
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { JwtAuthGuard } from '../auth/jwt/jwt.guard';
 import { RolesGuard } from '../auth/role/role.guard';
 import { Roles } from '../common/decorator/roles';
@@ -28,7 +28,9 @@ export class DailyLookController {
   constructor(private readonly dailyLookService: DailyLookService) {}
 
   @Post()
-  @Roles(RoleType.ADMIN)
+  @ApiOperation({
+    summary: '데일리룩 생성',
+  })
   @ApiSuccessResponse({ paginated: false })
   @UseInterceptors(FileInterceptor('file'))
   async create(
@@ -39,12 +41,18 @@ export class DailyLookController {
   }
 
   @Get()
+  @ApiOperation({
+    summary: '데일리룩 전체조회',
+  })
   @ApiSuccessResponse({ paginated: true, model: DailyLook })
   async getAll(@Query() pagination: PaginationDto) {
     return await this.dailyLookService.getAll(pagination);
   }
 
   @Post('tag')
+  @ApiOperation({
+    summary: '데일리룩 태그 생성',
+  })
   @Roles(RoleType.ADMIN)
   @ApiSuccessResponse({ paginated: false })
   async createTag(@Body() body: CreateDailyLookTagDto): Promise<void> {

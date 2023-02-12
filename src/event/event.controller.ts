@@ -54,7 +54,7 @@ export class EventController {
 
   @Get()
   @ApiOperation({
-    summary: '이벤트 전체 조회',
+    summary: '이벤트 전체조회',
   })
   @ApiSuccessResponse({ paginated: true, model: Event })
   async getEvents(@Query() pagination: PaginationDto) {
