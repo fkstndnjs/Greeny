@@ -39,8 +39,8 @@ import { DailyLookModule } from './daily-look/daily-look.module';
     BannerModule,
     ChallengeModule,
     EventModule,
-    AwsModule,
     DailyLookModule,
+    AwsModule,
   ],
   controllers: [AppController],
   providers: [
