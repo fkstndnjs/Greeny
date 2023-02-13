@@ -32,13 +32,13 @@ export class DailyLook extends BaseEntity {
   text: string;
 
   @ApiProperty({
-    example: 1,
+    example: '1',
   })
   @ManyToOne(() => DailyLookTag)
   dailyLookTag: DailyLookTag;
 
   @ApiProperty({
-    example: 1,
+    example: '1',
   })
   @ManyToOne(() => User)
   user: User;

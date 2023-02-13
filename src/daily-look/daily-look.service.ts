@@ -82,4 +82,16 @@ export class DailyLookService {
       await manager.save(dailyLookTag);
     });
   }
+
+  async getAllTag(): Promise<{
+    dailyLookTags: DailyLookTag[];
+  }> {
+    const dailyLookTags = await this.dailyLookTagRepository
+      .createQueryBuilder('dailyLookTag')
+      .select(['dailyLookTag.name'])
+      .orderBy('dailyLookTag.name')
+      .getMany();
+
+    return { dailyLookTags };
+  }
 }

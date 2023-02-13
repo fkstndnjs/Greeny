@@ -11,6 +11,8 @@ import {
 import { FileInterceptor } from '@nestjs/platform-express';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { GetAllDailyLookResponseDto } from 'src/daily-look/dto/getAllDailyLookResponse.dto';
+import { GetAllDailyLookTagResponseDto } from 'src/daily-look/dto/getAllDailyLookTag.dto';
+import { DailyLookTag } from 'src/daily-look/entities/dailyLookTag.entity';
 import { JwtAuthGuard } from '../auth/jwt/jwt.guard';
 import { RolesGuard } from '../auth/role/role.guard';
 import { Roles } from '../common/decorator/roles';
@@ -58,5 +60,19 @@ export class DailyLookController {
   @ApiSuccessResponse({ paginated: false })
   async createTag(@Body() body: CreateDailyLookTagDto): Promise<void> {
     await this.dailyLookService.createTag(body);
+  }
+
+  @Get('tag')
+  @ApiOperation({
+    summary: '데일리룩 태그 전체조회',
+  })
+  @ApiSuccessResponse({
+    paginated: false,
+    model: GetAllDailyLookTagResponseDto,
+  })
+  async getAllTag(): Promise<{
+    dailyLookTags: DailyLookTag[];
+  }> {
+    return await this.dailyLookService.getAllTag();
   }
 }

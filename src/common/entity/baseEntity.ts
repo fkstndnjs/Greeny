@@ -20,7 +20,7 @@ export abstract class BaseEntity {
   updatedAt: Date;
 
   @ApiProperty({
-    example: 1,
+    example: '1',
   })
   @PrimaryGeneratedColumn({
     type: 'bigint',

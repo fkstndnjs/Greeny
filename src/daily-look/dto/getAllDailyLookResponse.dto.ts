@@ -1,37 +1,14 @@
-import { ApiProperty } from '@nestjs/swagger';
+import { ApiProperty, PickType } from '@nestjs/swagger';
+import { DailyLook } from 'src/daily-look/entities/dailyLook.entity';
 
-export class GetAllDailyLookResponseDto {
-  @ApiProperty({
-    example: '2023-02-08T07:00:16.117Z',
-  })
-  createdAt: string;
-
-  @ApiProperty({
-    example: '2023-02-13T00:10:25.724Z',
-  })
-  updatedAt: '2023-02-13T00:10:25.724Z';
-
-  @ApiProperty({
-    example: '1',
-  })
-  id: '1';
-
-  @ApiProperty({
-    example:
-      'https://greeny2023.s3.amazonaws.com/dailyLook/1675839615841_스크린샷2023-02-06오전11.47.08.png',
-  })
-  imgUrl: 'https://greeny2023.s3.amazonaws.com/dailyLook/1675839615841_스크린샷2023-02-06오전11.47.08.png';
-
-  @ApiProperty({
-    example: '제목',
-  })
-  title: '제목';
-
-  @ApiProperty({
-    example: '본문',
-  })
-  text: '본문';
-
+export class GetAllDailyLookResponseDto extends PickType(DailyLook, [
+  'createdAt',
+  'updatedAt',
+  'id',
+  'imgUrl',
+  'title',
+  'text',
+]) {
   @ApiProperty({
     example: {
       id: '1',
