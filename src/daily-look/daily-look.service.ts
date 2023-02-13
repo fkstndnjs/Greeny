@@ -47,6 +47,10 @@ export class DailyLookService {
   async getAll(pagination: PaginationDto) {
     const [dailyLooks, total] = await this.dailyLookRepository
       .createQueryBuilder('dailyLook')
+      .leftJoin('dailyLook.dailyLookTag', 'dailyLookTag')
+      .leftJoin('dailyLook.user', 'user')
+      .addSelect(['dailyLookTag.id', 'dailyLookTag.name'])
+      .addSelect(['user.id', 'user.nickname'])
       .orderBy('dailyLook.createdAt', 'DESC')
       .skip(pagination.getOffset())
       .take(pagination.getLimit())

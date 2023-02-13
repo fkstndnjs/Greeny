@@ -10,6 +10,7 @@ import {
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
+import { GetAllDailyLookResponseDto } from 'src/daily-look/dto/getAllDailyLookResponse.dto';
 import { JwtAuthGuard } from '../auth/jwt/jwt.guard';
 import { RolesGuard } from '../auth/role/role.guard';
 import { Roles } from '../common/decorator/roles';
@@ -44,7 +45,7 @@ export class DailyLookController {
   @ApiOperation({
     summary: '데일리룩 전체조회',
   })
-  @ApiSuccessResponse({ paginated: true, model: DailyLook })
+  @ApiSuccessResponse({ paginated: true, model: GetAllDailyLookResponseDto })
   async getAll(@Query() pagination: PaginationDto) {
     return await this.dailyLookService.getAll(pagination);
   }
