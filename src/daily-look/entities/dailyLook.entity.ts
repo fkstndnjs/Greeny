@@ -1,5 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { BaseEntity } from 'src/common/entity/baseEntity';
+import { User } from 'src/user/entities/user.entity';
 import { Column, Entity, ManyToOne } from 'typeorm';
 import { DailyLookTag } from './dailyLookTag.entity';
 
@@ -35,4 +36,10 @@ export class DailyLook extends BaseEntity {
   })
   @ManyToOne(() => DailyLookTag)
   dailyLookTag: DailyLookTag;
+
+  @ApiProperty({
+    example: 1,
+  })
+  @ManyToOne(() => User)
+  user: User;
 }

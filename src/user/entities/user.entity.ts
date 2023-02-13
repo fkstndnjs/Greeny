@@ -29,6 +29,11 @@ export class User extends BaseEntity {
   password: string;
 
   @Column({
+    length: 255,
+  })
+  thumbnail: string;
+
+  @Column({
     length: 100,
   })
   role: string;
