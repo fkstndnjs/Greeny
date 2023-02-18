@@ -35,12 +35,12 @@ import { DailyLookModule } from './daily-look/daily-look.module';
     }),
     UserModule,
     AuthModule,
+    AwsModule,
     BannerModule,
     EmailModule,
     ChallengeModule,
     EventModule,
     DailyLookModule,
-    AwsModule,
   ],
   controllers: [AppController],
   providers: [
