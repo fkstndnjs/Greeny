@@ -66,6 +66,17 @@ export class DailyLookService {
     return new Pagination(total, pagination.getLimit(), pagination.page, items);
   }
 
+  async getOne(idDailyLook: number): Promise<DailyLook> {
+    return await this.dailyLookRepository
+      .createQueryBuilder('dailyLook')
+      .leftJoin('dailyLook.dailyLookTag', 'dailyLookTag')
+      .leftJoin('dailyLook.user', 'user')
+      .addSelect(['dailyLookTag.id', 'dailyLookTag.name'])
+      .addSelect(['user.id', 'user.nickname'])
+      .where('dailyLook.id = :idDailyLook', { idDailyLook })
+      .getOneOrFail();
+  }
+
   async createTag(body: CreateDailyLookTagDto): Promise<void> {
     const { name } = body;
 

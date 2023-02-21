@@ -2,6 +2,7 @@ import {
   Body,
   Controller,
   Get,
+  Param,
   Post,
   Query,
   UploadedFile,
@@ -50,6 +51,15 @@ export class DailyLookController {
   @ApiSuccessResponse({ paginated: true, model: GetAllDailyLookResponseDto })
   async getAll(@Query() pagination: PaginationDto) {
     return await this.dailyLookService.getAll(pagination);
+  }
+
+  @Get(':idDailyLook')
+  @ApiOperation({
+    summary: '데일리룩 상세조회',
+  })
+  @ApiSuccessResponse({ paginated: false, model: GetAllDailyLookResponseDto })
+  async getOne(@Param('idDailyLook') idDailyLook: number): Promise<DailyLook> {
+    return await this.dailyLookService.getOne(idDailyLook);
   }
 
   @Post('tag')
