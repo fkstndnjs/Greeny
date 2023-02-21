@@ -1,7 +1,10 @@
 import { ApiProperty } from '@nestjs/swagger';
+import { IsNumber, IsString } from 'class-validator';
 import { BaseEntity } from 'src/common/entity/baseEntity';
+import { UserBookmarkDailyLook } from 'src/daily-look/entities/userBookmarkDailyLook.entity';
+import { UserLikeDailyLook } from 'src/daily-look/entities/userLikeDailyLook.entity';
 import { User } from 'src/user/entities/user.entity';
-import { Column, Entity, ManyToOne } from 'typeorm';
+import { Column, Entity, ManyToOne, OneToMany } from 'typeorm';
 import { DailyLookTag } from './dailyLookTag.entity';
 
 @Entity('dailyLook')
@@ -13,6 +16,7 @@ export class DailyLook extends BaseEntity {
   @Column({
     length: 255,
   })
+  @IsString()
   imgUrl: string;
 
   @ApiProperty({
@@ -21,6 +25,7 @@ export class DailyLook extends BaseEntity {
   @Column({
     length: 100,
   })
+  @IsString()
   title: string;
 
   @ApiProperty({
@@ -29,17 +34,42 @@ export class DailyLook extends BaseEntity {
   @Column({
     length: 255,
   })
+  @IsString()
   text: string;
+
+  @ApiProperty({
+    example: 1,
+  })
+  @IsNumber()
+  likeCount: number;
+
+  @ApiProperty({
+    example: 1,
+  })
+  @IsNumber()
+  bookmarkCount: number;
 
   @ApiProperty({
     example: '1',
   })
-  @ManyToOne(() => DailyLookTag)
+  @ManyToOne(() => DailyLookTag, (DailyLookTag) => DailyLookTag.dailyLook)
   dailyLookTag: DailyLookTag;
 
   @ApiProperty({
     example: '1',
   })
-  @ManyToOne(() => User)
+  @ManyToOne(() => User, (User) => User.dailyLook)
   user: User;
+
+  @OneToMany(
+    () => UserBookmarkDailyLook,
+    (UserBookmarkDailyLook) => UserBookmarkDailyLook.dailyLook,
+  )
+  userBookmarkDailyLook: UserBookmarkDailyLook[];
+
+  @OneToMany(
+    () => UserLikeDailyLook,
+    (UserLikeDailyLook) => UserLikeDailyLook.dailyLook,
+  )
+  userLikeDailyLook: UserLikeDailyLook[];
 }

@@ -1,3 +1,6 @@
+import { DailyLook } from 'src/daily-look/entities/dailyLook.entity';
+import { UserBookmarkDailyLook } from 'src/daily-look/entities/userBookmarkDailyLook.entity';
+import { UserLikeDailyLook } from 'src/daily-look/entities/userLikeDailyLook.entity';
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { BaseEntity } from '../../common/entity/baseEntity';
 
@@ -37,4 +40,19 @@ export class User extends BaseEntity {
     length: 100,
   })
   role: string;
+
+  @OneToMany(() => DailyLook, (DailyLook) => DailyLook.user)
+  dailyLook: DailyLook[];
+
+  @OneToMany(
+    () => UserBookmarkDailyLook,
+    (UserBookmarkDailyLook) => UserBookmarkDailyLook.user,
+  )
+  userBookmarkDailyLook: UserBookmarkDailyLook[];
+
+  @OneToMany(
+    () => UserLikeDailyLook,
+    (UserLikeDailyLook) => UserLikeDailyLook.user,
+  )
+  userLikeDailyLook: UserLikeDailyLook[];
 }
