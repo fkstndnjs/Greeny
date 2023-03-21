@@ -33,6 +33,7 @@ export class User extends BaseEntity {
 
   @Column({
     length: 255,
+    nullable: true,
   })
   thumbnail: string;
 
