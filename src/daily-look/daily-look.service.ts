@@ -1,5 +1,7 @@
 import { ConflictException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { UserLikeDailyLook } from 'src/daily-look/entities/userLikeDailyLook.entity';
+import { User } from 'src/user/entities/user.entity';
 import { DataSource, Repository } from 'typeorm';
 import { AwsService } from '../aws/aws.service';
 import { Pagination, PaginationDto } from '../common/dto/pagination.dto';
@@ -20,6 +22,7 @@ export class DailyLookService {
   ) {}
 
   async create(
+    user: User,
     file: Express.Multer.File,
     body: CreateDailyLookDto,
   ): Promise<void> {
@@ -35,6 +38,7 @@ export class DailyLookService {
     this.dataSource.transaction(async (manager) => {
       const dailyLook = new DailyLook();
 
+      dailyLook.user = user;
       dailyLook.imgUrl = imgUrl;
       dailyLook.text = text;
       dailyLook.title = title;
@@ -104,5 +108,20 @@ export class DailyLookService {
       .getMany();
 
     return { dailyLookTags };
+  }
+
+  async like(user: User, idDailyLook: number): Promise<void> {
+    const dailyLook = await this.dailyLookRepository.findOneByOrFail({
+      id: idDailyLook,
+    });
+
+    this.dataSource.transaction(async (manager) => {
+      const userLikeDailyLook = new UserLikeDailyLook();
+
+      userLikeDailyLook.user = user;
+      userLikeDailyLook.dailyLook = dailyLook;
+
+      await manager.save(userLikeDailyLook);
+    });
   }
 }
