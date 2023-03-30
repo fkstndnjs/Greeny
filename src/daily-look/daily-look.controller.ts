@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   Param,
   Post,
@@ -11,9 +12,11 @@ import {
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
+import { CurrentUser } from 'src/common/decorator/currentUser';
 import { GetAllDailyLookResponseDto } from 'src/daily-look/dto/getAllDailyLookResponse.dto';
 import { GetAllDailyLookTagResponseDto } from 'src/daily-look/dto/getAllDailyLookTag.dto';
 import { DailyLookTag } from 'src/daily-look/entities/dailyLookTag.entity';
+import { User } from 'src/user/entities/user.entity';
 import { JwtAuthGuard } from '../auth/jwt/jwt.guard';
 import { RolesGuard } from '../auth/role/role.guard';
 import { Roles } from '../common/decorator/roles';
@@ -38,10 +41,11 @@ export class DailyLookController {
   @ApiSuccessResponse({ paginated: false })
   @UseInterceptors(FileInterceptor('file'))
   async create(
+    @CurrentUser() user: User,
     @UploadedFile() file: Express.Multer.File,
     @Body() body: CreateDailyLookDto,
   ): Promise<void> {
-    await this.dailyLookService.create(file, body);
+    await this.dailyLookService.create(user, file, body);
   }
 
   @Get()
@@ -84,5 +88,49 @@ export class DailyLookController {
     dailyLookTags: DailyLookTag[];
   }> {
     return await this.dailyLookService.getAllTag();
+  }
+
+  @Post('like/:idDailyLook')
+  @ApiOperation({
+    summary: '데일리룩 좋아요',
+  })
+  async addLike(
+    @CurrentUser() user: User,
+    @Param('idDailyLook') idDailyLook: number,
+  ): Promise<void> {
+    return await this.dailyLookService.addLike(user, idDailyLook);
+  }
+
+  @Delete('like/:idDailyLook')
+  @ApiOperation({
+    summary: '데일리룩 좋아요 취소',
+  })
+  async removeLike(
+    @CurrentUser() user: User,
+    @Param('idDailyLook') idDailyLook: number,
+  ): Promise<void> {
+    return await this.dailyLookService.removeLike(user, idDailyLook);
+  }
+
+  @Post('bookmark/:idDailyLook')
+  @ApiOperation({
+    summary: '데일리룩 북마크',
+  })
+  async bookmark(
+    @CurrentUser() user: User,
+    @Param('idDailyLook') idDailyLook: number,
+  ): Promise<void> {
+    return await this.dailyLookService.bookmark(user, idDailyLook);
+  }
+
+  @Delete('bookmark/:idDailyLook')
+  @ApiOperation({
+    summary: '데일리룩 좋아요 취소',
+  })
+  async removeBookmark(
+    @CurrentUser() user: User,
+    @Param('idDailyLook') idDailyLook: number,
+  ): Promise<void> {
+    return await this.dailyLookService.removeBookmark(user, idDailyLook);
   }
 }
