@@ -1,5 +1,6 @@
 import { ConflictException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { UserBookmarkDailyLook } from 'src/daily-look/entities/userBookmarkDailyLook.entity';
 import { UserLikeDailyLook } from 'src/daily-look/entities/userLikeDailyLook.entity';
 import { User } from 'src/user/entities/user.entity';
 import { DataSource, Repository } from 'typeorm';
@@ -110,7 +111,7 @@ export class DailyLookService {
     return { dailyLookTags };
   }
 
-  async like(user: User, idDailyLook: number): Promise<void> {
+  async addLike(user: User, idDailyLook: number): Promise<void> {
     const dailyLook = await this.dailyLookRepository.findOneByOrFail({
       id: idDailyLook,
     });
@@ -123,5 +124,64 @@ export class DailyLookService {
 
       await manager.save(userLikeDailyLook);
     });
+  }
+
+  async removeLike(user: User, idDailyLook: number): Promise<void> {
+    const queryRunner = this.dataSource.createQueryRunner();
+
+    await queryRunner.connect();
+    await queryRunner.startTransaction();
+    try {
+      await queryRunner.manager
+        .createQueryBuilder()
+        .delete()
+        .from(UserLikeDailyLook)
+        .where('dailyLookId = :idDailyLook', { idDailyLook })
+        .andWhere('userId = :idUser', { idUser: user.id })
+        .execute();
+
+      await queryRunner.commitTransaction();
+    } catch (err) {
+      await queryRunner.rollbackTransaction();
+    } finally {
+      await queryRunner.release();
+    }
+  }
+
+  async bookmark(user: User, idDailyLook: number): Promise<void> {
+    const dailyLook = await this.dailyLookRepository.findOneByOrFail({
+      id: idDailyLook,
+    });
+
+    this.dataSource.transaction(async (manager) => {
+      const userBookmarkDailyLook = new UserBookmarkDailyLook();
+
+      userBookmarkDailyLook.user = user;
+      userBookmarkDailyLook.dailyLook = dailyLook;
+
+      await manager.save(userBookmarkDailyLook);
+    });
+  }
+
+  async removeBookmark(user: User, idDailyLook: number): Promise<void> {
+    const queryRunner = this.dataSource.createQueryRunner();
+
+    await queryRunner.connect();
+    await queryRunner.startTransaction();
+    try {
+      await queryRunner.manager
+        .createQueryBuilder()
+        .delete()
+        .from(UserBookmarkDailyLook)
+        .where('dailyLookId = :idDailyLook', { idDailyLook })
+        .andWhere('userId = :idUser', { idUser: user.id })
+        .execute();
+
+      await queryRunner.commitTransaction();
+    } catch (err) {
+      await queryRunner.rollbackTransaction();
+    } finally {
+      await queryRunner.release();
+    }
   }
 }

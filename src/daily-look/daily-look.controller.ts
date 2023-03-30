@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   Param,
   Post,
@@ -93,10 +94,43 @@ export class DailyLookController {
   @ApiOperation({
     summary: '데일리룩 좋아요',
   })
-  async like(
+  async addLike(
     @CurrentUser() user: User,
     @Param('idDailyLook') idDailyLook: number,
   ): Promise<void> {
-    return await this.dailyLookService.like(user, idDailyLook);
+    return await this.dailyLookService.addLike(user, idDailyLook);
+  }
+
+  @Delete('like/:idDailyLook')
+  @ApiOperation({
+    summary: '데일리룩 좋아요 취소',
+  })
+  async removeLike(
+    @CurrentUser() user: User,
+    @Param('idDailyLook') idDailyLook: number,
+  ): Promise<void> {
+    return await this.dailyLookService.removeLike(user, idDailyLook);
+  }
+
+  @Post('bookmark/:idDailyLook')
+  @ApiOperation({
+    summary: '데일리룩 북마크',
+  })
+  async bookmark(
+    @CurrentUser() user: User,
+    @Param('idDailyLook') idDailyLook: number,
+  ): Promise<void> {
+    return await this.dailyLookService.bookmark(user, idDailyLook);
+  }
+
+  @Delete('bookmark/:idDailyLook')
+  @ApiOperation({
+    summary: '데일리룩 좋아요 취소',
+  })
+  async removeBookmark(
+    @CurrentUser() user: User,
+    @Param('idDailyLook') idDailyLook: number,
+  ): Promise<void> {
+    return await this.dailyLookService.removeBookmark(user, idDailyLook);
   }
 }
