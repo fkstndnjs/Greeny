@@ -53,8 +53,8 @@ export class DailyLookController {
     summary: '데일리룩 전체조회',
   })
   @ApiSuccessResponse({ paginated: true, model: GetAllDailyLookResponseDto })
-  async getAll(@Query() pagination: PaginationDto) {
-    return await this.dailyLookService.getAll(pagination);
+  async getAll(@CurrentUser() user: User, @Query() pagination: PaginationDto) {
+    return await this.dailyLookService.getAll(user, pagination);
   }
 
   @Get(':idDailyLook')

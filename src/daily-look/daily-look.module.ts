@@ -5,9 +5,19 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { DailyLook } from './entities/dailyLook.entity';
 import { DailyLookTag } from './entities/dailyLookTag.entity';
 import { AwsModule } from '../aws/aws.module';
+import { UserBookmarkDailyLook } from 'src/daily-look/entities/userBookmarkDailyLook.entity';
+import { UserLikeDailyLook } from 'src/daily-look/entities/userLikeDailyLook.entity';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([DailyLook, DailyLookTag]), AwsModule],
+  imports: [
+    TypeOrmModule.forFeature([
+      DailyLook,
+      DailyLookTag,
+      UserBookmarkDailyLook,
+      UserLikeDailyLook,
+    ]),
+    AwsModule,
+  ],
   controllers: [DailyLookController],
   providers: [DailyLookService],
 })
