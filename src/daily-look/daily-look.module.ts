@@ -13,8 +13,8 @@ import { UserLikeDailyLook } from 'src/daily-look/entities/userLikeDailyLook.ent
     TypeOrmModule.forFeature([
       DailyLook,
       DailyLookTag,
-      UserLikeDailyLook,
       UserBookmarkDailyLook,
+      UserLikeDailyLook,
     ]),
     AwsModule,
   ],
