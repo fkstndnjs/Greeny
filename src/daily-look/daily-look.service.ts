@@ -18,6 +18,10 @@ export class DailyLookService {
     private dailyLookRepository: Repository<DailyLook>,
     @InjectRepository(DailyLookTag)
     private dailyLookTagRepository: Repository<DailyLookTag>,
+    @InjectRepository(UserBookmarkDailyLook)
+    private userBookmarkDailyLook: Repository<UserBookmarkDailyLook>,
+    @InjectRepository(UserLikeDailyLook)
+    private userLikeDailyLook: Repository<UserLikeDailyLook>,
     private dataSource: DataSource,
     private awsService: AwsService,
   ) {}
@@ -49,7 +53,7 @@ export class DailyLookService {
     });
   }
 
-  async getAll(pagination: PaginationDto) {
+  async getAll(user: User, pagination: PaginationDto) {
     const [dailyLooks, total] = await this.dailyLookRepository
       .createQueryBuilder('dailyLook')
       .leftJoin('dailyLook.dailyLookTag', 'dailyLookTag')
@@ -61,12 +65,47 @@ export class DailyLookService {
       .take(pagination.getLimit())
       .getManyAndCount();
 
-    const items = dailyLooks.map((dailyLook) => {
-      return {
-        ...dailyLook,
-        imgUrl: this.awsService.getAwsS3FileUrl(dailyLook.imgUrl),
-      };
-    });
+    const items = await Promise.all(
+      dailyLooks.map(async (dailyLook) => {
+        const { likes } = await this.userLikeDailyLook
+          .createQueryBuilder('userLikeDailyLook')
+          .select('COUNT(*)', 'likes')
+          .where('userLikeDailyLook.dailyLook = :idDailyLook', {
+            idDailyLook: dailyLook.id,
+          })
+          .getRawOne();
+
+        const { isLiked } = await this.userLikeDailyLook
+          .createQueryBuilder('userLikeDailyLook')
+          .select('COUNT(*)', 'isLiked')
+          .where('userLikeDailyLook.user = :idUser', {
+            idUser: user.id,
+          })
+          .andWhere('userLikeDailyLook.dailyLook = :idDailyLook', {
+            idDailyLook: dailyLook.id,
+          })
+          .getRawOne();
+
+        const { isBookmarked } = await this.userBookmarkDailyLook
+          .createQueryBuilder('userBookmarkDailyLook')
+          .select('COUNT(*)', 'isBookmarked')
+          .where('userBookmarkDailyLook.user = :idUser', {
+            idUser: user.id,
+          })
+          .andWhere('userBookmarkDailyLook.dailyLook = :idDailyLook', {
+            idDailyLook: dailyLook.id,
+          })
+          .getRawOne();
+
+        return {
+          ...dailyLook,
+          imgUrl: this.awsService.getAwsS3FileUrl(dailyLook.imgUrl),
+          likes,
+          isUserLiked: !!Number(isLiked),
+          isUserBookmarked: !!Number(isBookmarked),
+        };
+      }),
+    );
 
     return new Pagination(total, pagination.getLimit(), pagination.page, items);
   }
