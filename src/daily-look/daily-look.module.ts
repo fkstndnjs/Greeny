@@ -12,8 +12,8 @@ import { UserLikeDailyLook } from 'src/daily-look/entities/userLikeDailyLook.ent
   imports: [
     TypeOrmModule.forFeature([
       DailyLook,
-      DailyLookTag,
       UserBookmarkDailyLook,
+      DailyLookTag,
       UserLikeDailyLook,
     ]),
     AwsModule,
