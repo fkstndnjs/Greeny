@@ -11,8 +11,8 @@ import { UserLikeDailyLook } from 'src/daily-look/entities/userLikeDailyLook.ent
 @Module({
   imports: [
     TypeOrmModule.forFeature([
-      DailyLook,
       DailyLookTag,
+      DailyLook,
       UserBookmarkDailyLook,
       UserLikeDailyLook,
     ]),
