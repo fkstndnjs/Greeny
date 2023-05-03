@@ -22,8 +22,8 @@ export class DailyLookService {
     private userBookmarkDailyLook: Repository<UserBookmarkDailyLook>,
     @InjectRepository(UserLikeDailyLook)
     private userLikeDailyLook: Repository<UserLikeDailyLook>,
-    private awsService: AwsService,
     private dataSource: DataSource,
+    private awsService: AwsService,
   ) {}
 
   async create(
