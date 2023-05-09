@@ -10,6 +10,8 @@ import { CreateDailyLookDto } from './dto/createDailyLook.dto';
 import { CreateDailyLookTagDto } from './dto/createDailyLookTag.dto';
 import { DailyLook } from './entities/dailyLook.entity';
 import { DailyLookTag } from './entities/dailyLookTag.entity';
+import { CreateDailyLookCommentDto } from 'src/daily-look/dto/createDailyLookComment.dto';
+import { DailyLookComment } from 'src/daily-look/entities/dailyLookComment.entity';
 
 @Injectable()
 export class DailyLookService {
@@ -222,5 +224,27 @@ export class DailyLookService {
     } finally {
       await queryRunner.release();
     }
+  }
+
+  async createComment(
+    user: User,
+    idDailyLook: number,
+    body: CreateDailyLookCommentDto,
+  ) {
+    const { comment } = body;
+
+    const dailyLook = await this.dailyLookRepository.findOneByOrFail({
+      id: idDailyLook,
+    });
+
+    this.dataSource.transaction(async (manager) => {
+      const dailyLookComment = new DailyLookComment();
+
+      dailyLookComment.comment = comment;
+      dailyLookComment.user = user;
+      dailyLookComment.dailyLook = dailyLook;
+
+      await manager.save(dailyLookComment);
+    });
   }
 }
