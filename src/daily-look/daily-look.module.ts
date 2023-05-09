@@ -7,6 +7,7 @@ import { DailyLookTag } from './entities/dailyLookTag.entity';
 import { AwsModule } from '../aws/aws.module';
 import { UserBookmarkDailyLook } from 'src/daily-look/entities/userBookmarkDailyLook.entity';
 import { UserLikeDailyLook } from 'src/daily-look/entities/userLikeDailyLook.entity';
+import { DailyLookComment } from 'src/daily-look/entities/dailyLookComment.entity';
 
 @Module({
   imports: [
@@ -15,6 +16,7 @@ import { UserLikeDailyLook } from 'src/daily-look/entities/userLikeDailyLook.ent
       DailyLookTag,
       DailyLook,
       UserLikeDailyLook,
+      DailyLookComment,
     ]),
     AwsModule,
   ],
