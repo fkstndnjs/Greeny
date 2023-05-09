@@ -27,6 +27,7 @@ import { DailyLookService } from './daily-look.service';
 import { CreateDailyLookDto } from './dto/createDailyLook.dto';
 import { CreateDailyLookTagDto } from './dto/createDailyLookTag.dto';
 import { DailyLook } from './entities/dailyLook.entity';
+import { CreateDailyLookCommentDto } from 'src/daily-look/dto/createDailyLookComment.dto';
 
 @ApiTags('데일리룩')
 @UseGuards(JwtAuthGuard, RolesGuard)
@@ -132,5 +133,17 @@ export class DailyLookController {
     @Param('idDailyLook') idDailyLook: number,
   ): Promise<void> {
     return await this.dailyLookService.removeBookmark(user, idDailyLook);
+  }
+
+  @Post('comment/:idDailyLook')
+  @ApiOperation({
+    summary: '데일리룩 댓글 작성',
+  })
+  async createComment(
+    @CurrentUser() user: User,
+    @Param('idDailyLook') idDailyLook: number,
+    @Body() body: CreateDailyLookCommentDto,
+  ): Promise<void> {
+    return await this.dailyLookService.createComment(user, idDailyLook, body);
   }
 }
