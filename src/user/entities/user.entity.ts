@@ -3,6 +3,7 @@ import { UserBookmarkDailyLook } from 'src/daily-look/entities/userBookmarkDaily
 import { UserLikeDailyLook } from 'src/daily-look/entities/userLikeDailyLook.entity';
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { BaseEntity } from '../../common/entity/baseEntity';
+import { DailyLookComment } from 'src/daily-look/entities/dailyLookComment.entity';
 
 @Entity('user')
 export class User extends BaseEntity {
@@ -57,4 +58,10 @@ export class User extends BaseEntity {
     (UserLikeDailyLook) => UserLikeDailyLook.user,
   )
   userLikeDailyLook: UserLikeDailyLook[];
+
+  @OneToMany(
+    () => DailyLookComment,
+    (DailyLookComment) => DailyLookComment.user,
+  )
+  dailyLookComment: DailyLookComment[];
 }
