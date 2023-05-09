@@ -6,6 +6,7 @@ import { UserLikeDailyLook } from 'src/daily-look/entities/userLikeDailyLook.ent
 import { User } from 'src/user/entities/user.entity';
 import { Column, Entity, ManyToOne, OneToMany } from 'typeorm';
 import { DailyLookTag } from './dailyLookTag.entity';
+import { DailyLookComment } from 'src/daily-look/entities/dailyLookComment.entity';
 
 @Entity('dailyLook')
 export class DailyLook extends BaseEntity {
@@ -72,4 +73,10 @@ export class DailyLook extends BaseEntity {
     (UserLikeDailyLook) => UserLikeDailyLook.dailyLook,
   )
   userLikeDailyLook: UserLikeDailyLook[];
+
+  @OneToMany(
+    () => DailyLookComment,
+    (DailyLookComment) => DailyLookComment.dailyLook,
+  )
+  dailyLookComment: DailyLookComment[];
 }
