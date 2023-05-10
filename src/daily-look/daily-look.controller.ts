@@ -5,6 +5,7 @@ import {
   Get,
   Param,
   Post,
+  Put,
   Query,
   UploadedFile,
   UseGuards,
@@ -145,5 +146,21 @@ export class DailyLookController {
     @Body() body: CreateDailyLookCommentDto,
   ): Promise<void> {
     return await this.dailyLookService.createComment(user, idDailyLook, body);
+  }
+
+  @Put('comment/:idDailyLookComment')
+  @ApiOperation({
+    summary: '데일리룩 댓글 수정',
+  })
+  async updateComment(
+    @CurrentUser() user: User,
+    @Param('idDailyLookComment') idDailyLookComment: number,
+    @Body() body: CreateDailyLookCommentDto,
+  ): Promise<void> {
+    return await this.dailyLookService.updateComment(
+      user,
+      idDailyLookComment,
+      body,
+    );
   }
 }

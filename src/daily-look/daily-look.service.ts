@@ -1,4 +1,9 @@
-import { ConflictException, Injectable } from '@nestjs/common';
+import {
+  ConflictException,
+  ForbiddenException,
+  Inject,
+  Injectable,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { UserBookmarkDailyLook } from 'src/daily-look/entities/userBookmarkDailyLook.entity';
 import { UserLikeDailyLook } from 'src/daily-look/entities/userLikeDailyLook.entity';
@@ -21,9 +26,11 @@ export class DailyLookService {
     @InjectRepository(DailyLookTag)
     private dailyLookTagRepository: Repository<DailyLookTag>,
     @InjectRepository(UserBookmarkDailyLook)
-    private userBookmarkDailyLook: Repository<UserBookmarkDailyLook>,
+    private userBookmarkDailyLookRepository: Repository<UserBookmarkDailyLook>,
     @InjectRepository(UserLikeDailyLook)
-    private userLikeDailyLook: Repository<UserLikeDailyLook>,
+    private userLikeDailyLookRepository: Repository<UserLikeDailyLook>,
+    @InjectRepository(DailyLookComment)
+    private dailyLookCommentRepository: Repository<DailyLookComment>,
     private awsService: AwsService,
     private dataSource: DataSource,
   ) {}
@@ -69,7 +76,7 @@ export class DailyLookService {
 
     const items = await Promise.all(
       dailyLooks.map(async (dailyLook) => {
-        const { likes } = await this.userLikeDailyLook
+        const { likes } = await this.userLikeDailyLookRepository
           .createQueryBuilder('userLikeDailyLook')
           .select('COUNT(*)', 'likes')
           .where('userLikeDailyLook.dailyLook = :idDailyLook', {
@@ -77,7 +84,7 @@ export class DailyLookService {
           })
           .getRawOne();
 
-        const { isLiked } = await this.userLikeDailyLook
+        const { isLiked } = await this.userLikeDailyLookRepository
           .createQueryBuilder('userLikeDailyLook')
           .select('COUNT(*)', 'isLiked')
           .where('userLikeDailyLook.user = :idUser', {
@@ -88,7 +95,7 @@ export class DailyLookService {
           })
           .getRawOne();
 
-        const { isBookmarked } = await this.userBookmarkDailyLook
+        const { isBookmarked } = await this.userBookmarkDailyLookRepository
           .createQueryBuilder('userBookmarkDailyLook')
           .select('COUNT(*)', 'isBookmarked')
           .where('userBookmarkDailyLook.user = :idUser', {
@@ -246,5 +253,49 @@ export class DailyLookService {
 
       await manager.save(dailyLookComment);
     });
+  }
+
+  async updateComment(
+    user: User,
+    idDailyLookComment: number,
+    body: CreateDailyLookCommentDto,
+  ) {
+    const queryRunner = this.dataSource.createQueryRunner();
+    await queryRunner.connect();
+    await queryRunner.startTransaction();
+    try {
+      const { comment } = body;
+
+      const dailyLookComment =
+        await this.dailyLookCommentRepository.findOneOrFail({
+          where: {
+            id: idDailyLookComment,
+          },
+          relations: ['user'],
+        });
+
+      if (dailyLookComment.user.id !== user.id) {
+        throw new ForbiddenException();
+      }
+
+      await queryRunner.manager
+        .createQueryBuilder()
+        .update(DailyLookComment)
+        .set({
+          comment,
+        })
+        .where('id = :idDailyLookComment', { idDailyLookComment })
+        .andWhere('user = :idUser', {
+          idUser: user.id,
+        })
+        .execute();
+
+      await queryRunner.commitTransaction();
+    } catch (err) {
+      await queryRunner.rollbackTransaction();
+      throw new ForbiddenException();
+    } finally {
+      await queryRunner.release();
+    }
   }
 }
