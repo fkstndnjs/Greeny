@@ -124,8 +124,16 @@ export class DailyLookService {
       .createQueryBuilder('dailyLook')
       .leftJoin('dailyLook.dailyLookTag', 'dailyLookTag')
       .leftJoin('dailyLook.user', 'user')
+      .leftJoin('dailyLook.dailyLookComment', 'dailyLookComment')
+      .leftJoin('dailyLookComment.user', 'dailyLookCommentUser')
       .addSelect(['dailyLookTag.id', 'dailyLookTag.name'])
       .addSelect(['user.id', 'user.nickname'])
+      .addSelect([
+        'dailyLookComment.id',
+        'dailyLookComment.comment',
+        'dailyLookCommentUser.id',
+        'dailyLookCommentUser.name',
+      ])
       .where('dailyLook.id = :idDailyLook', { idDailyLook })
       .getOneOrFail();
   }
