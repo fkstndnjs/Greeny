@@ -163,4 +163,15 @@ export class DailyLookController {
       body,
     );
   }
+
+  @Delete('comment/:idDailyLookComment')
+  @ApiOperation({
+    summary: '데일리룩 댓글 삭제',
+  })
+  async deleteComment(
+    @CurrentUser() user: User,
+    @Param('idDailyLookComment') idDailyLookComment: number,
+  ): Promise<void> {
+    return await this.dailyLookService.deleteComment(user, idDailyLookComment);
+  }
 }
