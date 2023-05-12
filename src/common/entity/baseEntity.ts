@@ -1,6 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Exclude, Expose } from 'class-transformer';
-import { IsNumber } from 'class-validator';
 import {
   CreateDateColumn,
   PrimaryGeneratedColumn,
