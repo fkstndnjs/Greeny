@@ -1,7 +1,7 @@
 import { DailyLook } from 'src/daily-look/entities/dailyLook.entity';
 import { UserBookmarkDailyLook } from 'src/daily-look/entities/userBookmarkDailyLook.entity';
 import { UserLikeDailyLook } from 'src/daily-look/entities/userLikeDailyLook.entity';
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, OneToMany } from 'typeorm';
 import { BaseEntity } from '../../common/entity/baseEntity';
 import { DailyLookComment } from 'src/daily-look/entities/dailyLookComment.entity';
 
