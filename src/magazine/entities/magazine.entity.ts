@@ -1,5 +1,6 @@
 import { BaseEntity } from 'src/common/entity/baseEntity';
-import { Column, Entity } from 'typeorm';
+import { SubMagazine } from 'src/magazine/entities/subMagazine.entity';
+import { Column, Entity, OneToMany } from 'typeorm';
 
 @Entity('magazine')
 export class Magazine extends BaseEntity {
@@ -17,4 +18,12 @@ export class Magazine extends BaseEntity {
     length: 255,
   })
   subtitle: string;
+
+  @OneToMany(
+    () => SubMagazine,
+    (SubMagazine) => {
+      SubMagazine.magazine;
+    },
+  )
+  subMagazine: SubMagazine[];
 }
