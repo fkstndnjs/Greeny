@@ -297,6 +297,7 @@ export class DailyLookService {
         })
         .execute();
 
+      console.log('test');
       await queryRunner.commitTransaction();
     } catch (err) {
       await queryRunner.rollbackTransaction();
