@@ -64,8 +64,11 @@ export class DailyLookController {
     summary: '데일리룩 상세조회',
   })
   @ApiSuccessResponse({ paginated: false, model: GetAllDailyLookResponseDto })
-  async getOne(@Param('idDailyLook') idDailyLook: number): Promise<DailyLook> {
-    return await this.dailyLookService.getOne(idDailyLook);
+  async getOne(
+    @CurrentUser() user: User,
+    @Param('idDailyLook') idDailyLook: number,
+  ): Promise<DailyLook> {
+    return await this.dailyLookService.getOne(idDailyLook, user);
   }
 
   @Post('tag')
