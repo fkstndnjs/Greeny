@@ -1,5 +1,20 @@
 import { BaseEntity } from 'src/common/entity/baseEntity';
-import { Entity } from 'typeorm';
+import { Column, Entity } from 'typeorm';
 
 @Entity('magazine')
-export class Magazine extends BaseEntity {}
+export class Magazine extends BaseEntity {
+  @Column({
+    length: 255,
+  })
+  thumbnail: string;
+
+  @Column({
+    length: 255,
+  })
+  title: string;
+
+  @Column({
+    length: 255,
+  })
+  subtitle: string;
+}
