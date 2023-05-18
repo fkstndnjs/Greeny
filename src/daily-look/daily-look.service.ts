@@ -118,8 +118,8 @@ export class DailyLookService {
     return new Pagination(total, pagination.getLimit(), pagination.page, items);
   }
 
-  async getOne(idDailyLook: number): Promise<DailyLook> {
-    return await this.dailyLookRepository
+  async getOne(idDailyLook: number, user: User): Promise<DailyLook> {
+    const dailyLook: any = await this.dailyLookRepository
       .createQueryBuilder('dailyLook')
       .leftJoin('dailyLook.dailyLookTag', 'dailyLookTag')
       .leftJoin('dailyLook.user', 'user')
@@ -135,6 +135,17 @@ export class DailyLookService {
       ])
       .where('dailyLook.id = :idDailyLook', { idDailyLook })
       .getOneOrFail();
+
+    const commentsWithIsMise = dailyLook.dailyLookComment.map((comment) => {
+      comment.user.id === user.id
+        ? (comment = { ...comment, isMine: true })
+        : (comment = { ...comment, isMine: false });
+      return comment;
+    });
+
+    dailyLook.dailyLookComment = commentsWithIsMise;
+
+    return dailyLook;
   }
 
   async createTag(body: CreateDailyLookTagDto): Promise<void> {
