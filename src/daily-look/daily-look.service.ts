@@ -128,6 +128,7 @@ export class DailyLookService {
       .addSelect(['dailyLookTag.id', 'dailyLookTag.name'])
       .addSelect(['user.id', 'user.nickname'])
       .addSelect([
+        'dailyLookComment.createdAt',
         'dailyLookComment.id',
         'dailyLookComment.comment',
         'dailyLookCommentUser.id',
