@@ -30,11 +30,6 @@ export class Magazine extends BaseEntity {
   })
   subtitle: string;
 
-  @OneToMany(
-    () => SubMagazine,
-    (SubMagazine) => {
-      SubMagazine.magazine;
-    },
-  )
+  @OneToMany(() => SubMagazine, (subMagazine) => subMagazine.magazine)
   subMagazine: SubMagazine[];
 }
