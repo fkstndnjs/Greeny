@@ -2,7 +2,6 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Pagination, PaginationDto } from 'src/common/dto/pagination.dto';
 import { Magazine } from 'src/magazine/entities/magazine.entity';
-import { SubMagazine } from 'src/magazine/entities/subMagazine.entity';
 import { Repository } from 'typeorm';
 
 @Injectable()
