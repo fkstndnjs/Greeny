@@ -1,7 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { BaseEntity } from 'src/common/entity/baseEntity';
 import { Magazine } from 'src/magazine/entities/magazine.entity';
-import { Column, Entity, JoinColumn, ManyToOne } from 'typeorm';
+import { Column, Entity, ManyToOne } from 'typeorm';
 
 @Entity('subMagazine')
 export class SubMagazine extends BaseEntity {
