@@ -1,73 +1,81 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+![Challenge page-1.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/9320f382-43bf-425a-9b16-42627190d7fe/Challenge_page-1.png)
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+![Challenge page.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/ccd39a5a-1767-48e2-8613-119324e609bd/Challenge_page.png)
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+![DAILYLOOK PAGE.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/ee008f6e-66d2-4b35-bb6a-71e607657005/DAILYLOOK_PAGE.png)
 
-## Description
+![EVENT PAGE.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/2211e1c4-796f-4d85-9ec5-b67c529c98d0/EVENT_PAGE.png)
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+![Magazine page.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/594e8dd0-5e3b-4f3e-abf7-7740dbefe92e/Magazine_page.png)
 
-## Installation
+![Main page.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/e616b8ee-1bc2-48a8-be65-5df706c74e60/Main_page.png)
 
-```bash
-$ npm install
-```
+![MYPAGE.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/f0d5c78e-76e0-4a11-9c53-377afe7d88b6/MYPAGE.png)
 
-## Running the app
+---
 
-```bash
-# development
-$ npm run start
+# 프로젝트 소개
 
-# watch mode
-$ npm run start:dev
+그리니는 슬로우 패션을 지향하는 플랫폼으로, 베스트 챌린지와 데일리룩 등의 다양한 컨텐츠를 통해 사용자들과 슬로우 패션 문화를 공유합니다. 그리니의 매거진은 슬로우 패션에 대한 깊이 있는 정보를 제공하며, 프로모션 배너를 통해 다양한 이벤트와 프로모션을 알립니다.
 
-# production mode
-$ npm run start:prod
-```
+---
 
-## Test
+# 주요 기능
 
-```bash
-# unit tests
-$ npm run test
+- **유저**
+    - 회원가입
+    - 로그인
+    - 아이디 찾기
+    - 비밀번호 찾기
+- **데일리룩**
+    - 데일리룩 참여, 전체 조회, 상세 조회, 수정, 삭제
+    - 댓글 기능
+    - 좋아요, 북마크 기능
+- **챌린지(미구현)**
+    - 챌린지 참여, 전체 조회, 상세 조회, 수정, 삭제
+    - 댓글 기능
+    - 좋아요, 북마크 기능
+- **매거진**
+    - 전체 조회, 상세 조회
+- **이벤트**
+    - 전체 조회, 상세 조회
+- **마이페이지(미구현)**
+    - 마이페이지 조회, 수정
+    - 개인 프로필
 
-# e2e tests
-$ npm run test:e2e
+---
 
-# test coverage
-$ npm run test:cov
-```
+# 팀원
 
-## Support
+- 기획 1명
+- 디자이너 1명
+- 프론트엔드 1명
+- 백엔드 1명
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+---
 
-## Stay in touch
+# 역할
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+- 개발 리드
+- 백엔드 개발
+- 인프라 구축
 
-## License
+---
 
-Nest is [MIT licensed](LICENSE).
+# AWS 인프라
+
+- EC2: t2.medium
+- RDS: db.t3.micro, MySQL
+- S3
+
+---
+
+# Swagger 문서
+
+- [http://3.36.124.43/swagger-api/](http://3.36.124.43/swagger-api/)
+
+---
+
+# Github
+
+[https://github.com/fkstndnjs/Greeny](https://github.com/fkstndnjs/Greeny)
