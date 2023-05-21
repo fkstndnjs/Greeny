@@ -29,6 +29,7 @@ import { CreateDailyLookDto } from './dto/createDailyLook.dto';
 import { CreateDailyLookTagDto } from './dto/createDailyLookTag.dto';
 import { DailyLook } from './entities/dailyLook.entity';
 import { CreateDailyLookCommentDto } from 'src/daily-look/dto/createDailyLookComment.dto';
+import { GetOneDailyLookResponseDto } from 'src/daily-look/dto/getOneDailyLookResponse.dto';
 
 @ApiTags('데일리룩')
 @UseGuards(JwtAuthGuard, RolesGuard)
@@ -63,7 +64,7 @@ export class DailyLookController {
   @ApiOperation({
     summary: '데일리룩 상세조회',
   })
-  @ApiSuccessResponse({ paginated: false, model: GetAllDailyLookResponseDto })
+  @ApiSuccessResponse({ paginated: false, model: GetOneDailyLookResponseDto })
   async getOne(
     @CurrentUser() user: User,
     @Param('idDailyLook') idDailyLook: number,
