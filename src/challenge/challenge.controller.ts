@@ -59,4 +59,13 @@ export class ChallengeController {
     @CurrentUser() user: User,
     @Param('idChallenge') idChallenge: number,
   ) {}
+
+  @Delete('bookmark/:idChallenge')
+  @ApiOperation({
+    summary: '챌린지 북마크 취소',
+  })
+  async removeBookmark(
+    @CurrentUser() user: User,
+    @Param('idChallenge') idChallenge: number,
+  ) {}
 }
