@@ -32,4 +32,13 @@ export class ChallengeController {
     @CurrentUser() user: User,
     @Param('idChallenge') idChallenge: number,
   ) {}
+
+  @Post('like/:idChallenge')
+  @ApiOperation({
+    summary: '챌린지 좋아요',
+  })
+  async addLike(
+    @CurrentUser() user: User,
+    @Param('idChallenge') idChallenge: number,
+  ) {}
 }
