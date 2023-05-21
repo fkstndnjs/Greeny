@@ -1,4 +1,4 @@
-import { Controller, Get, Param, Post, Query } from '@nestjs/common';
+import { Controller, Delete, Get, Param, Post, Query } from '@nestjs/common';
 import { ChallengeService } from './challenge.service';
 import { ApiOperation } from '@nestjs/swagger';
 import { CurrentUser } from 'src/common/decorator/currentUser';
@@ -38,6 +38,15 @@ export class ChallengeController {
     summary: '챌린지 좋아요',
   })
   async addLike(
+    @CurrentUser() user: User,
+    @Param('idChallenge') idChallenge: number,
+  ) {}
+
+  @Delete('like/:idChallenge')
+  @ApiOperation({
+    summary: '챌린지 좋아요 취소',
+  })
+  async removeLike(
     @CurrentUser() user: User,
     @Param('idChallenge') idChallenge: number,
   ) {}
