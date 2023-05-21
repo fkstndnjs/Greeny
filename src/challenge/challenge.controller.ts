@@ -50,4 +50,13 @@ export class ChallengeController {
     @CurrentUser() user: User,
     @Param('idChallenge') idChallenge: number,
   ) {}
+
+  @Post('bookmark/:idChallenge')
+  @ApiOperation({
+    summary: '챌린지 북마크',
+  })
+  async bookmark(
+    @CurrentUser() user: User,
+    @Param('idChallenge') idChallenge: number,
+  ) {}
 }
