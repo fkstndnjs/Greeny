@@ -32,27 +32,17 @@ export class GetAllDailyLookResponseDto extends PickType(DailyLook, [
   };
 
   @ApiProperty({
-    example: [
-      {
-        id: '1',
-        createdAt: '2023-05-21T12:34:56Z',
-        comment: '댓글 내용',
-        isMine: true,
-        user: {
-          id: '1',
-          name: '댓글 유저',
-        },
-      },
-    ],
+    example: 10,
   })
-  dailyLookComment: Array<{
-    id: string;
-    createdAt: Date;
-    comment: string;
-    isMine: boolean;
-    user: {
-      id: string;
-      name: string;
-    };
-  }>;
+  likes: number;
+
+  @ApiProperty({
+    example: true,
+  })
+  isUserLiked: boolean;
+
+  @ApiProperty({
+    example: true,
+  })
+  isUserBookmarked: boolean;
 }
