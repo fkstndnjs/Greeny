@@ -18,15 +18,15 @@ async function bootstrap() {
   app.useGlobalInterceptors(new SuccessInterceptor());
   app.useGlobalFilters(new HttpExceptionFilter(), new EntityNotFoundFilter());
 
-  app.use(
-    ['/swagger-api'],
-    expressBasicAuth({
-      challenge: true,
-      users: {
-        [process.env.SWAGGER_USER]: process.env.SWAGGER_PASSWORD,
-      },
-    }),
-  );
+  // app.use(
+  //   ['/swagger-api'],
+  //   expressBasicAuth({
+  //     challenge: true,
+  //     users: {
+  //       [process.env.SWAGGER_USER]: process.env.SWAGGER_PASSWORD,
+  //     },
+  //   }),
+  // );
 
   const config = new DocumentBuilder()
     .setTitle('Greeny')
