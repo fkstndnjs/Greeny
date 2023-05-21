@@ -94,4 +94,13 @@ export class ChallengeController {
     @CurrentUser() user: User,
     @Param('idChallengeComment') idChallengeComment: number,
   ) {}
+
+  @Delete('comment/:idChallengeComment')
+  @ApiOperation({
+    summary: '챌린지 댓글 삭제',
+  })
+  async deleteComment(
+    @CurrentUser() user: User,
+    @Param('idChallengeComment') idChallengeComment: number,
+  ) {}
 }
