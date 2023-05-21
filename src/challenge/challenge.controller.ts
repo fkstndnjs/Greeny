@@ -68,4 +68,13 @@ export class ChallengeController {
     @CurrentUser() user: User,
     @Param('idChallenge') idChallenge: number,
   ) {}
+
+  @Post('comment/:idChallenge')
+  @ApiOperation({
+    summary: '챌린지 댓글 작성',
+  })
+  async createComment(
+    @CurrentUser() user: User,
+    @Param('idChallenge') idChallenge: number,
+  ) {}
 }
