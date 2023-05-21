@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Query } from '@nestjs/common';
+import { Controller, Get, Param, Post, Query } from '@nestjs/common';
 import { ChallengeService } from './challenge.service';
 import { ApiOperation } from '@nestjs/swagger';
 import { CurrentUser } from 'src/common/decorator/currentUser';
@@ -22,5 +22,14 @@ export class ChallengeController {
   async getAllChallenge(
     @CurrentUser() user: User,
     @Query() pagination: PaginationDto,
+  ) {}
+
+  @Get(':idChallenge')
+  @ApiOperation({
+    summary: '챌린지 상세조회',
+  })
+  async getOneChallenge(
+    @CurrentUser() user: User,
+    @Param('idChallenge') idChallenge: number,
   ) {}
 }
