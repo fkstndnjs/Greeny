@@ -14,6 +14,7 @@ import { EventModule } from './event/event.module';
 import { AwsModule } from './aws/aws.module';
 import { DailyLookModule } from './daily-look/daily-look.module';
 import { MagazineModule } from './magazine/magazine.module';
+import { MypageModule } from './mypage/mypage.module';
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -43,6 +44,7 @@ import { MagazineModule } from './magazine/magazine.module';
     EventModule,
     DailyLookModule,
     MagazineModule,
+    MypageModule,
   ],
   controllers: [AppController],
   providers: [
