@@ -1,73 +1,59 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+# 프로젝트 소개
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+그리니는 슬로우 패션을 지향하는 플랫폼으로, 베스트 챌린지와 데일리룩 등의 다양한 컨텐츠를 통해 사용자들과 슬로우 패션 문화를 공유합니다. 그리니의 매거진은 슬로우 패션에 대한 깊이 있는 정보를 제공하며, 프로모션 배너를 통해 다양한 이벤트와 프로모션을 알립니다.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+---
 
-## Description
+# 주요 기능
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+- **유저**
+    - 회원가입
+    - 로그인
+    - 아이디 찾기
+    - 비밀번호 찾기
+- **데일리룩**
+    - 데일리룩 참여, 전체 조회, 상세 조회, 수정, 삭제
+    - 댓글 기능
+    - 좋아요, 북마크 기능
+- **챌린지(미구현)**
+    - 챌린지 참여, 전체 조회, 상세 조회, 수정, 삭제
+    - 댓글 기능
+    - 좋아요, 북마크 기능
+- **매거진**
+    - 전체 조회, 상세 조회
+- **이벤트**
+    - 전체 조회, 상세 조회
+- **마이페이지(미구현)**
+    - 마이페이지 조회, 수정
+    - 개인 프로필
 
-## Installation
+---
 
-```bash
-$ npm install
-```
+# 팀원
 
-## Running the app
+- 기획 1명
+- 디자이너 1명
+- 프론트엔드 1명
+- 백엔드 1명
 
-```bash
-# development
-$ npm run start
+---
 
-# watch mode
-$ npm run start:dev
+# 역할
 
-# production mode
-$ npm run start:prod
-```
+- 개발 리드
+- 백엔드 개발
+- 인프라 구축
 
-## Test
+---
 
-```bash
-# unit tests
-$ npm run test
+# AWS 인프라
 
-# e2e tests
-$ npm run test:e2e
+- EC2: t2.medium
+- RDS: db.t3.micro, MySQL
+- S3
 
-# test coverage
-$ npm run test:cov
-```
+---
 
-## Support
+# Swagger 문서
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](LICENSE).
+- [http://3.36.124.43/swagger-api/](http://3.36.124.43/swagger-api/)
