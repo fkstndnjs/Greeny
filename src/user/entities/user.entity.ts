@@ -4,6 +4,7 @@ import { UserLikeDailyLook } from 'src/daily-look/entities/userLikeDailyLook.ent
 import { Column, Entity, OneToMany } from 'typeorm';
 import { BaseEntity } from '../../common/entity/baseEntity';
 import { DailyLookComment } from 'src/daily-look/entities/dailyLookComment.entity';
+import { Challenge } from 'src/challenge/entities/challenge.entity';
 
 @Entity('user')
 export class User extends BaseEntity {
@@ -64,4 +65,7 @@ export class User extends BaseEntity {
     (DailyLookComment) => DailyLookComment.user,
   )
   dailyLookComment: DailyLookComment[];
+
+  @OneToMany(() => Challenge, (Challenge) => Challenge.user)
+  challenge: Challenge[];
 }
