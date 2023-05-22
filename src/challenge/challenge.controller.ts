@@ -15,7 +15,7 @@ import { User } from 'aws-sdk/clients/appstream';
 import { PaginationDto } from 'src/common/dto/pagination.dto';
 import { JwtAuthGuard } from 'src/auth/jwt/jwt.guard';
 
-@ApiTags('챌린지')
+@ApiTags('챌린지(미구현)')
 @UseGuards(JwtAuthGuard)
 @Controller('challenge')
 export class ChallengeController {
