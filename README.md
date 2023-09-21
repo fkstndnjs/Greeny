@@ -43,6 +43,38 @@
 
 ---
 
+# 사용 기술
+
+1. **NestJS**: 이 프로젝트는 NestJS, 하나의 Node.js 프레임워크를 사용하고 있습니다. 여기에는 다음 NestJS 관련 패키지들이 포함됩니다: `@nestjs/common`, `@nestjs/config`, `@nestjs/core`, `@nestjs/jwt`, `@nestjs/mapped-types`, `@nestjs/passport`, `@nestjs/platform-express`, `@nestjs/swagger`, `@nestjs/throttler`, `@nestjs/typeorm`.
+
+2. **TypeORM**: 이 프로젝트는 데이터베이스 액세스를 위해 TypeORM을 사용합니다. 이는 `typeorm` 패키지와 `@nestjs/typeorm` 패키지를 통해 사용됩니다.
+
+3. **MySQL**: 데이터베이스로 MySQL을 사용하고 있습니다. 이는 `mysql2` 패키지를 사용하여 연결합니다.
+
+4. **Express**: `@nestjs/platform-express`를 통해 Express.js를 사용하고 있으며, Express middleware인 `express-basic-auth`도 사용하고 있습니다.
+
+5. **Passport**: 사용자 인증을 위해 Passport를 사용하고 있습니다. 이에는 `passport`, `passport-jwt`, `passport-local` 패키지들이 사용되고 있습니다.
+
+6. **AWS SDK**: Amazon Web Services의 서비스에 접근하기 위해 `aws-sdk` 패키지를 사용하고 있습니다.
+
+7. **bcrypt**: `bcrypt` 패키지를 통해 비밀번호 해싱과 같은 보안 관련 기능을 구현하고 있습니다.
+
+8. **Nodemailer**: 이메일 전송 기능을 위해 `nodemailer` 패키지를 사용하고 있습니다.
+
+9. **UUID**: 고유 식별자 생성을 위해 `uuid` 패키지를 사용하고 있습니다.
+
+10. **Class-transformer** & **Class-validator**: 클래스를 변환하고 유효성을 검사하는데 사용됩니다.
+
+11. **RxJS**: 비동기 프로그래밍을 위한 라이브러리입니다.
+
+12. **테스팅 도구**: Jest(`jest`, `ts-jest`, `@nestjs/testing`, `@types/jest`)와 Supertest(`supertest`, `@types/supertest`)를 사용하여 단위 테스트와 통합 테스트를 수행합니다.
+
+13. **Typescript**: 전체 프로젝트는 Typescript로 작성되어 있습니다.
+
+14. **Linting and Formatting**: ESLint와 Prettier를 통해 코드를 깔끔하게 유지하고 있습니다.
+
+---
+
 # 팀원
 
 - 기획 1명
