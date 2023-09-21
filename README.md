@@ -26,6 +26,14 @@
 - **마이페이지(미구현)**
     - 마이페이지 조회, 수정
     - 개인 프로필
+- **ETC**
+    - NestJS의 Interceptor를 사용하여 API 응답 형식을 일관성있게 유지
+    - NestJS의 Filter를 사용하여 예외 처리를 일관성있게 관리
+    - Swagger를 사용하여 API를 문서화
+    - Swagger 문서에 express-basic-auth 미들웨어를 사용하여 접근을 제한
+    - NestJS Throttler를 사용하여 앱의 요청 횟수를 제한
+    - JwtAuthGuard를 사용하여 JSON Web Token(JWT) 기반의 사용자 인증을 구현
+    - RolesGuard를 사용하여 사용자의 역할을 기반으로 액세스 권한을 제어
 
 ---
 
