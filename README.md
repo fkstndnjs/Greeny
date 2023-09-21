@@ -4,6 +4,8 @@
 
 ---
 
+![Challenge page-1.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/9320f382-43bf-425a-9b16-42627190d7fe/Challenge_page-1.png)
+
 # 주요 기능
 
 - **유저**
