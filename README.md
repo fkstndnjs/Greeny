@@ -4,7 +4,7 @@
 
 ---
 
-https://s3-us-west-2.amazonaws.com/secure.notion-static.com/9320f382-43bf-425a-9b16-42627190d7fe/Challenge_page-1.png
+[https://s3-us-west-2.amazonaws.com/secure.notion-static.com/9320f382-43bf-425a-9b16-42627190d7fe/Challenge_page-1.png](https://www.notion.so/Greeny-523f496661b443e5b465720187a1006e?pvs=4#544ccd5eb4974f13a95c32637ed68789)
 
 # 주요 기능
 
