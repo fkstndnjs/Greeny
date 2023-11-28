@@ -139,7 +139,7 @@ export class DailyLookController {
   ): Promise<void> {
     return await this.dailyLookService.removeBookmark(user, idDailyLook);
   }
-
+   
   @Post('comment/:idDailyLook')
   @ApiOperation({
     summary: '데일리룩 댓글 작성',
