@@ -22,10 +22,8 @@ const getAllDailyLookTag_dto_1 = require("./dto/getAllDailyLookTag.dto");
 const user_entity_1 = require("../user/entities/user.entity");
 const jwt_guard_1 = require("../auth/jwt/jwt.guard");
 const role_guard_1 = require("../auth/role/role.guard");
-const roles_1 = require("../common/decorator/roles");
 const successResponse_1 = require("../common/decorator/successResponse");
 const pagination_dto_1 = require("../common/dto/pagination.dto");
-const RoleType_1 = require("../common/enum/RoleType");
 const daily_look_service_1 = require("./daily-look.service");
 const createDailyLook_dto_1 = require("./dto/createDailyLook.dto");
 const createDailyLookTag_dto_1 = require("./dto/createDailyLookTag.dto");
@@ -115,7 +113,6 @@ __decorate([
     (0, swagger_1.ApiOperation)({
         summary: '데일리룩 태그 생성',
     }),
-    (0, roles_1.Roles)(RoleType_1.RoleType.ADMIN),
     (0, successResponse_1.ApiSuccessResponse)({ paginated: false }),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
