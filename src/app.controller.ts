@@ -7,7 +7,7 @@ import { RoleType } from './common/enum/RoleType';
 import { RolesGuard } from './auth/role/role.guard';
 
 @ApiTags('app')
-@UseGuards(JwtAuthGuard, RolesGuard)
+// @UseGuards(JwtAuthGuard, RolesGuard)
 @Roles(RoleType.ADMIN)
 @Controller()
 export class AppController {
