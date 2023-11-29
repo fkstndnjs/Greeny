@@ -17,6 +17,8 @@ const common_1 = require("@nestjs/common");
 const platform_express_1 = require("@nestjs/platform-express");
 const swagger_1 = require("@nestjs/swagger");
 const successResponse_1 = require("../common/decorator/successResponse");
+const jwt_guard_1 = require("../auth/jwt/jwt.guard");
+const role_guard_1 = require("../auth/role/role.guard");
 const roles_1 = require("../common/decorator/roles");
 const pagination_dto_1 = require("../common/dto/pagination.dto");
 const RoleType_1 = require("../common/enum/RoleType");
@@ -64,6 +66,7 @@ __decorate([
 ], EventController.prototype, "getEvents", null);
 EventController = __decorate([
     (0, swagger_1.ApiTags)('이벤트'),
+    (0, common_1.UseGuards)(jwt_guard_1.JwtAuthGuard, role_guard_1.RolesGuard),
     (0, common_1.Controller)('event'),
     __metadata("design:paramtypes", [event_service_1.EventService])
 ], EventController);

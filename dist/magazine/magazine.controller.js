@@ -15,6 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.MagazineController = void 0;
 const common_1 = require("@nestjs/common");
 const magazine_service_1 = require("./magazine.service");
+const jwt_guard_1 = require("../auth/jwt/jwt.guard");
 const swagger_1 = require("@nestjs/swagger");
 const pagination_dto_1 = require("../common/dto/pagination.dto");
 let MagazineController = class MagazineController {
@@ -37,6 +38,7 @@ __decorate([
 ], MagazineController.prototype, "getMagazines", null);
 MagazineController = __decorate([
     (0, swagger_1.ApiTags)('매거진'),
+    (0, common_1.UseGuards)(jwt_guard_1.JwtAuthGuard),
     (0, common_1.Controller)('magazine'),
     __metadata("design:paramtypes", [magazine_service_1.MagazineService])
 ], MagazineController);
