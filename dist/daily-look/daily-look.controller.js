@@ -20,8 +20,6 @@ const currentUser_1 = require("../common/decorator/currentUser");
 const getAllDailyLookResponse_dto_1 = require("./dto/getAllDailyLookResponse.dto");
 const getAllDailyLookTag_dto_1 = require("./dto/getAllDailyLookTag.dto");
 const user_entity_1 = require("../user/entities/user.entity");
-const jwt_guard_1 = require("../auth/jwt/jwt.guard");
-const role_guard_1 = require("../auth/role/role.guard");
 const roles_1 = require("../common/decorator/roles");
 const successResponse_1 = require("../common/decorator/successResponse");
 const pagination_dto_1 = require("../common/dto/pagination.dto");
@@ -216,7 +214,6 @@ __decorate([
 ], DailyLookController.prototype, "deleteComment", null);
 DailyLookController = __decorate([
     (0, swagger_1.ApiTags)('데일리룩'),
-    (0, common_1.UseGuards)(jwt_guard_1.JwtAuthGuard, role_guard_1.RolesGuard),
     (0, common_1.Controller)('daily-look'),
     __metadata("design:paramtypes", [daily_look_service_1.DailyLookService])
 ], DailyLookController);
