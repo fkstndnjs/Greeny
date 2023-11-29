@@ -32,7 +32,7 @@ import { CreateDailyLookCommentDto } from 'src/daily-look/dto/createDailyLookCom
 import { GetOneDailyLookResponseDto } from 'src/daily-look/dto/getOneDailyLookResponse.dto';
 
 @ApiTags('데일리룩')
-// @UseGuards(JwtAuthGuard, RolesGuard)
+@UseGuards(JwtAuthGuard, RolesGuard)
 @Controller('daily-look')
 export class DailyLookController {
   constructor(private readonly dailyLookService: DailyLookService) {}

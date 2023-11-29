@@ -21,7 +21,7 @@ import { Event } from './entites/event.entity';
 import { EventService } from './event.service';
 
 @ApiTags('이벤트')
-// @UseGuards(JwtAuthGuard, RolesGuard)
+@UseGuards(JwtAuthGuard, RolesGuard)
 @Controller('event')
 export class EventController {
   constructor(private readonly eventService: EventService) {}
