@@ -91,6 +91,6 @@
 
 ---
 
-# Swagger 문서(현재 AWS 비용 문제로 중단된 상태)
+# Swagger 문서
 
-- [http://3.36.124.43/swagger-api/](http://3.36.124.43/swagger-api/)
+- [[http://3.36.124.43/swagger-api/](http://15.164.166.255/swagger-api#/)
