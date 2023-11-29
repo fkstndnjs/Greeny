@@ -93,4 +93,4 @@
 
 # Swagger 문서
 
-- [http://3.36.124.43/swagger-api/](http://15.164.166.255/swagger-api#/)
+- [http://15.164.166.255/swagger-api#](http://15.164.166.255/swagger-api#/)
