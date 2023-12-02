@@ -72,6 +72,17 @@ export class DailyLookController {
     return await this.dailyLookService.getOne(idDailyLook, user);
   }
 
+  @Delete(':idDailyLook')
+  @ApiOperation({
+    summary: '데일리룩 삭제',
+  })
+  async delete(
+    @CurrentUser() user: User,
+    @Param('idDailyLook') idDailyLook: number,
+  ): Promise<void> {
+    return await this.dailyLookService.delete(user, idDailyLook);
+  }
+
   @Post('tag')
   @ApiOperation({
     summary: '데일리룩 태그 생성',

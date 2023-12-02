@@ -166,6 +166,42 @@ export class DailyLookService {
     });
   }
 
+  async delete(user: User, idDailyLook: number): Promise<void> {
+    const queryRunner = this.dataSource.createQueryRunner();
+    await queryRunner.connect();
+    await queryRunner.startTransaction();
+    try {
+      const dailyLook = await this.dailyLookRepository.findOneOrFail({
+        where: {
+          id: idDailyLook,
+        },
+        // relations: ['user'],
+      });
+
+      // if (dailyLook.user.id !== user.id) {
+      //   throw new ForbiddenException();
+      // }
+
+      await queryRunner.manager
+        .createQueryBuilder()
+        .delete()
+        .from(DailyLook)
+        .where('id = :idDailyLook', { idDailyLook })
+        // .andWhere('user = :idUser', {
+        //   idUser: user.id,
+        // })
+        .execute();
+
+      await queryRunner.commitTransaction();
+    } catch (err) {
+      console.log(err);
+      await queryRunner.rollbackTransaction();
+      throw new ForbiddenException();
+    } finally {
+      await queryRunner.release();
+    }
+  }
+
   async getAllTag(): Promise<{
     dailyLookTags: DailyLookTag[];
   }> {
