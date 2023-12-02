@@ -131,7 +131,7 @@ let DailyLookService = class DailyLookService {
             await manager.save(dailyLookTag);
         });
     }
-    async delete(user, idDailyLook) {
+    async delete(idDailyLook) {
         const queryRunner = this.dataSource.createQueryRunner();
         await queryRunner.connect();
         await queryRunner.startTransaction();

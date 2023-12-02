@@ -166,7 +166,7 @@ export class DailyLookService {
     });
   }
 
-  async delete(user: User, idDailyLook: number): Promise<void> {
+  async delete(idDailyLook: number): Promise<void> {
     const queryRunner = this.dataSource.createQueryRunner();
     await queryRunner.connect();
     await queryRunner.startTransaction();

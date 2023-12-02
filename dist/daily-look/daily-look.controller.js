@@ -20,8 +20,6 @@ const currentUser_1 = require("../common/decorator/currentUser");
 const getAllDailyLookResponse_dto_1 = require("./dto/getAllDailyLookResponse.dto");
 const getAllDailyLookTag_dto_1 = require("./dto/getAllDailyLookTag.dto");
 const user_entity_1 = require("../user/entities/user.entity");
-const jwt_guard_1 = require("../auth/jwt/jwt.guard");
-const role_guard_1 = require("../auth/role/role.guard");
 const successResponse_1 = require("../common/decorator/successResponse");
 const pagination_dto_1 = require("../common/dto/pagination.dto");
 const daily_look_service_1 = require("./daily-look.service");
@@ -42,8 +40,8 @@ let DailyLookController = class DailyLookController {
     async getOne(user, idDailyLook) {
         return await this.dailyLookService.getOne(idDailyLook, user);
     }
-    async delete(user, idDailyLook) {
-        return await this.dailyLookService.delete(user, idDailyLook);
+    async delete(idDailyLook) {
+        return await this.dailyLookService.delete(idDailyLook);
     }
     async createTag(body) {
         await this.dailyLookService.createTag(body);
@@ -116,10 +114,9 @@ __decorate([
     (0, swagger_1.ApiOperation)({
         summary: '데일리룩 삭제',
     }),
-    __param(0, (0, currentUser_1.CurrentUser)()),
-    __param(1, (0, common_1.Param)('idDailyLook')),
+    __param(0, (0, common_1.Param)('idDailyLook')),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [user_entity_1.User, Number]),
+    __metadata("design:paramtypes", [Number]),
     __metadata("design:returntype", Promise)
 ], DailyLookController.prototype, "delete", null);
 __decorate([
@@ -227,7 +224,6 @@ __decorate([
 ], DailyLookController.prototype, "deleteComment", null);
 DailyLookController = __decorate([
     (0, swagger_1.ApiTags)('데일리룩'),
-    (0, common_1.UseGuards)(jwt_guard_1.JwtAuthGuard, role_guard_1.RolesGuard),
     (0, common_1.Controller)('daily-look'),
     __metadata("design:paramtypes", [daily_look_service_1.DailyLookService])
 ], DailyLookController);
