@@ -32,7 +32,7 @@ import { CreateDailyLookCommentDto } from 'src/daily-look/dto/createDailyLookCom
 import { GetOneDailyLookResponseDto } from 'src/daily-look/dto/getOneDailyLookResponse.dto';
 
 @ApiTags('데일리룩')
-// @UseGuards(JwtAuthGuard, RolesGuard)
+@UseGuards(JwtAuthGuard, RolesGuard)
 @Controller('daily-look')
 export class DailyLookController {
   constructor(private readonly dailyLookService: DailyLookService) {}
@@ -77,10 +77,10 @@ export class DailyLookController {
     summary: '데일리룩 삭제',
   })
   async delete(
-    // @CurrentUser() user: User,
+    @CurrentUser() user: User,
     @Param('idDailyLook') idDailyLook: number,
   ): Promise<void> {
-    return await this.dailyLookService.delete(idDailyLook);
+    return await this.dailyLookService.truncateDailyLookTable();
   }
 
   @Post('tag')

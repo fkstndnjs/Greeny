@@ -166,7 +166,7 @@ export class DailyLookService {
     });
   }
 
-  async delete(idDailyLook: number): Promise<void> {
+  async delete(user: User, idDailyLook: number): Promise<void> {
     const queryRunner = this.dataSource.createQueryRunner();
     await queryRunner.connect();
     await queryRunner.startTransaction();
@@ -175,21 +175,21 @@ export class DailyLookService {
         where: {
           id: idDailyLook,
         },
-        // relations: ['user'],
+        relations: ['user'],
       });
 
-      // if (dailyLook.user.id !== user.id) {
-      //   throw new ForbiddenException();
-      // }
+      if (dailyLook.user.id !== user.id) {
+        throw new ForbiddenException();
+      }
 
       await queryRunner.manager
         .createQueryBuilder()
         .delete()
         .from(DailyLook)
         .where('id = :idDailyLook', { idDailyLook })
-        // .andWhere('user = :idUser', {
-        //   idUser: user.id,
-        // })
+        .andWhere('user = :idUser', {
+          idUser: user.id,
+        })
         .execute();
 
       await queryRunner.commitTransaction();
@@ -197,6 +197,25 @@ export class DailyLookService {
       console.log(err);
       await queryRunner.rollbackTransaction();
       throw new ForbiddenException();
+    } finally {
+      await queryRunner.release();
+    }
+  }
+
+  async truncateDailyLookTable(): Promise<void> {
+    const queryRunner = this.dataSource.createQueryRunner();
+    await queryRunner.connect();
+    await queryRunner.startTransaction();
+    try {
+      await queryRunner.query('SET FOREIGN_KEY_CHECKS = 0');
+      await queryRunner.query('TRUNCATE TABLE dailyLook');
+      await queryRunner.query('SET FOREIGN_KEY_CHECKS = 1');
+
+      await queryRunner.commitTransaction();
+    } catch (err) {
+      console.error(err);
+      await queryRunner.rollbackTransaction();
+      throw err;
     } finally {
       await queryRunner.release();
     }
