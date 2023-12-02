@@ -131,7 +131,7 @@ let DailyLookService = class DailyLookService {
             await manager.save(dailyLookTag);
         });
     }
-    async delete(idDailyLook) {
+    async delete(user, idDailyLook) {
         const queryRunner = this.dataSource.createQueryRunner();
         await queryRunner.connect();
         await queryRunner.startTransaction();
@@ -140,12 +140,19 @@ let DailyLookService = class DailyLookService {
                 where: {
                     id: idDailyLook,
                 },
+                relations: ['user'],
             });
+            if (dailyLook.user.id !== user.id) {
+                throw new common_1.ForbiddenException();
+            }
             await queryRunner.manager
                 .createQueryBuilder()
                 .delete()
                 .from(dailyLook_entity_1.DailyLook)
                 .where('id = :idDailyLook', { idDailyLook })
+                .andWhere('user = :idUser', {
+                idUser: user.id,
+            })
                 .execute();
             await queryRunner.commitTransaction();
         }
@@ -153,6 +160,25 @@ let DailyLookService = class DailyLookService {
             console.log(err);
             await queryRunner.rollbackTransaction();
             throw new common_1.ForbiddenException();
+        }
+        finally {
+            await queryRunner.release();
+        }
+    }
+    async truncateDailyLookTable() {
+        const queryRunner = this.dataSource.createQueryRunner();
+        await queryRunner.connect();
+        await queryRunner.startTransaction();
+        try {
+            await queryRunner.query('SET FOREIGN_KEY_CHECKS = 0');
+            await queryRunner.query('TRUNCATE TABLE dailyLook');
+            await queryRunner.query('SET FOREIGN_KEY_CHECKS = 1');
+            await queryRunner.commitTransaction();
+        }
+        catch (err) {
+            console.error(err);
+            await queryRunner.rollbackTransaction();
+            throw err;
         }
         finally {
             await queryRunner.release();
