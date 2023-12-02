@@ -42,6 +42,9 @@ let DailyLookController = class DailyLookController {
     async getOne(user, idDailyLook) {
         return await this.dailyLookService.getOne(idDailyLook, user);
     }
+    async delete(user, idDailyLook) {
+        return await this.dailyLookService.delete(user, idDailyLook);
+    }
     async createTag(body) {
         await this.dailyLookService.createTag(body);
     }
@@ -108,6 +111,17 @@ __decorate([
     __metadata("design:paramtypes", [user_entity_1.User, Number]),
     __metadata("design:returntype", Promise)
 ], DailyLookController.prototype, "getOne", null);
+__decorate([
+    (0, common_1.Delete)(':idDailyLook'),
+    (0, swagger_1.ApiOperation)({
+        summary: '데일리룩 삭제',
+    }),
+    __param(0, (0, currentUser_1.CurrentUser)()),
+    __param(1, (0, common_1.Param)('idDailyLook')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [user_entity_1.User, Number]),
+    __metadata("design:returntype", Promise)
+], DailyLookController.prototype, "delete", null);
 __decorate([
     (0, common_1.Post)('tag'),
     (0, swagger_1.ApiOperation)({

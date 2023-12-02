@@ -30,6 +30,7 @@ export declare class DailyLookController {
         id: number;
     }>>;
     getOne(user: User, idDailyLook: number): Promise<DailyLook>;
+    delete(user: User, idDailyLook: number): Promise<void>;
     createTag(body: CreateDailyLookTagDto): Promise<void>;
     getAllTag(): Promise<{
         dailyLookTags: DailyLookTag[];

@@ -131,6 +131,33 @@ let DailyLookService = class DailyLookService {
             await manager.save(dailyLookTag);
         });
     }
+    async delete(user, idDailyLook) {
+        const queryRunner = this.dataSource.createQueryRunner();
+        await queryRunner.connect();
+        await queryRunner.startTransaction();
+        try {
+            const dailyLook = await this.dailyLookRepository.findOneOrFail({
+                where: {
+                    id: idDailyLook,
+                },
+            });
+            await queryRunner.manager
+                .createQueryBuilder()
+                .delete()
+                .from(dailyLook_entity_1.DailyLook)
+                .where('id = :idDailyLook', { idDailyLook })
+                .execute();
+            await queryRunner.commitTransaction();
+        }
+        catch (err) {
+            console.log(err);
+            await queryRunner.rollbackTransaction();
+            throw new common_1.ForbiddenException();
+        }
+        finally {
+            await queryRunner.release();
+        }
+    }
     async getAllTag() {
         const dailyLookTags = await this.dailyLookTagRepository
             .createQueryBuilder('dailyLookTag')

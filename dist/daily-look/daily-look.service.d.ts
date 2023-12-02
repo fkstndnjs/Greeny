@@ -41,6 +41,7 @@ export declare class DailyLookService {
     }>>;
     getOne(idDailyLook: number, user: User): Promise<DailyLook>;
     createTag(body: CreateDailyLookTagDto): Promise<void>;
+    delete(user: User, idDailyLook: number): Promise<void>;
     getAllTag(): Promise<{
         dailyLookTags: DailyLookTag[];
     }>;
