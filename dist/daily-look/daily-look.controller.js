@@ -43,7 +43,7 @@ let DailyLookController = class DailyLookController {
         return await this.dailyLookService.getOne(idDailyLook, user);
     }
     async delete(user, idDailyLook) {
-        return await this.dailyLookService.truncateDailyLookTable();
+        return await this.dailyLookService.delete(user, idDailyLook);
     }
     async createTag(body) {
         await this.dailyLookService.createTag(body);
