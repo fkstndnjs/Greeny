@@ -80,7 +80,7 @@ export class DailyLookController {
     @CurrentUser() user: User,
     @Param('idDailyLook') idDailyLook: number,
   ): Promise<void> {
-    return await this.dailyLookService.truncateDailyLookTable();
+    return await this.dailyLookService.delete(user, idDailyLook);
   }
 
   @Post('tag')

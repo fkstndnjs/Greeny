@@ -202,25 +202,6 @@ export class DailyLookService {
     }
   }
 
-  async truncateDailyLookTable(): Promise<void> {
-    const queryRunner = this.dataSource.createQueryRunner();
-    await queryRunner.connect();
-    await queryRunner.startTransaction();
-    try {
-      await queryRunner.query('SET FOREIGN_KEY_CHECKS = 0');
-      await queryRunner.query('TRUNCATE TABLE dailyLook');
-      await queryRunner.query('SET FOREIGN_KEY_CHECKS = 1');
-
-      await queryRunner.commitTransaction();
-    } catch (err) {
-      console.error(err);
-      await queryRunner.rollbackTransaction();
-      throw err;
-    } finally {
-      await queryRunner.release();
-    }
-  }
-
   async getAllTag(): Promise<{
     dailyLookTags: DailyLookTag[];
   }> {
