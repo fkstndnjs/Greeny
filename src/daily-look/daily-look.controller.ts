@@ -87,7 +87,7 @@ export class DailyLookController {
   @ApiOperation({
     summary: '데일리룩 태그 생성',
   })
-  // @Roles(RoleType.ADMIN)
+  @Roles(RoleType.ADMIN)
   @ApiSuccessResponse({ paginated: false })
   async createTag(@Body() body: CreateDailyLookTagDto): Promise<void> {
     await this.dailyLookService.createTag(body);
