@@ -99,4 +99,6 @@
 
 # Swagger 문서
 
-- [http://15.164.166.255/swagger-api#](http://15.164.166.255/swagger-api#/)
+![](https://velog.velcdn.com/images/fkstndnjs/post/2774cb92-c6bf-4642-8a77-493204c4864d/image.png)
+![](https://velog.velcdn.com/images/fkstndnjs/post/839331d4-16c6-4319-a713-4cc2b8204ea3/image.png)
+![](https://velog.velcdn.com/images/fkstndnjs/post/00a049f3-9e62-4cb8-903d-232f9a6b2ef3/image.png)
