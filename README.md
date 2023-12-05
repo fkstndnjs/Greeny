@@ -1,5 +1,11 @@
 # 프로젝트 소개
 
+![](https://velog.velcdn.com/images/fkstndnjs/post/09bc5e31-9f68-4643-9607-bcce9e6b6ea8/image.png)
+![](https://velog.velcdn.com/images/fkstndnjs/post/0530a752-3bc0-4a63-a173-604cb6de9d7d/image.png)
+![](https://velog.velcdn.com/images/fkstndnjs/post/c97a1532-9d62-422b-90fc-8a0862bd8aee/image.png)
+![](https://velog.velcdn.com/images/fkstndnjs/post/b1c72f82-3404-458d-8a64-694895b8406d/image.png)
+![](https://velog.velcdn.com/images/fkstndnjs/post/3ca92a45-f374-42e1-943d-9be90e411940/image.png)
+
 그리니는 슬로우 패션을 지향하는 플랫폼으로, 베스트 챌린지와 데일리룩 등의 다양한 컨텐츠를 통해 사용자들과 슬로우 패션 문화를 공유합니다. 그리니의 매거진은 슬로우 패션에 대한 깊이 있는 정보를 제공하며, 프로모션 배너를 통해 다양한 이벤트와 프로모션을 알립니다.
 
 ---
@@ -93,4 +99,6 @@
 
 # Swagger 문서
 
-- [http://15.164.166.255/swagger-api#](http://15.164.166.255/swagger-api#/)
+![](https://velog.velcdn.com/images/fkstndnjs/post/2774cb92-c6bf-4642-8a77-493204c4864d/image.png)
+![](https://velog.velcdn.com/images/fkstndnjs/post/839331d4-16c6-4319-a713-4cc2b8204ea3/image.png)
+![](https://velog.velcdn.com/images/fkstndnjs/post/00a049f3-9e62-4cb8-903d-232f9a6b2ef3/image.png)
