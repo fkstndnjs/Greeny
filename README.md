@@ -13,30 +13,28 @@
 # 주요 기능
 
 - **유저**
-    - 회원가입
-    - 로그인
-    - 아이디 찾기
-    - 비밀번호 찾기
- 
+
+  - 회원가입
+  - 로그인
+  - 아이디 찾기
+  - 비밀번호 찾기
+
 - **데일리룩**
-    - 데일리룩 참여, 전체 조회, 상세 조회, 수정, 삭제
-    - 댓글 기능
-    - 좋아요, 북마크 기능
-      
+  - 데일리룩 참여, 전체 조회, 상세 조회, 수정, 삭제
+  - 댓글 기능
+  - 좋아요, 북마크 기능
 - **매거진**
-    - 전체 조회, 상세 조회
-      
+  - 전체 조회, 상세 조회
 - **이벤트**
-    - 전체 조회, 상세 조회
-      
+  - 전체 조회, 상세 조회
 - **ETC**
-    - NestJS의 Interceptor를 사용하여 API 응답 형식을 일관성있게 유지
-    - NestJS의 Filter를 사용하여 예외 처리를 일관성있게 관리
-    - Swagger를 사용하여 API를 문서화
-    - Swagger 문서에 express-basic-auth 미들웨어를 사용하여 접근을 제한
-    - NestJS Throttler를 사용하여 앱의 요청 횟수를 제한
-    - JwtAuthGuard를 사용하여 JSON Web Token(JWT) 기반의 사용자 인증을 구현
-    - RolesGuard를 사용하여 사용자의 역할을 기반으로 액세스 권한을 제어
+  - NestJS의 Interceptor를 사용하여 API 응답 형식을 일관성있게 유지
+  - NestJS의 Filter를 사용하여 예외 처리를 일관성있게 관리
+  - Swagger를 사용하여 API를 문서화
+  - Swagger 문서에 express-basic-auth 미들웨어를 사용하여 접근을 제한
+  - NestJS Throttler를 사용하여 앱의 요청 횟수를 제한
+  - JwtAuthGuard를 사용하여 JSON Web Token(JWT) 기반의 사용자 인증을 구현
+  - RolesGuard를 사용하여 사용자의 역할을 기반으로 액세스 권한을 제어
 
 ---
 
@@ -62,13 +60,11 @@
 
 10. **Class-transformer** & **Class-validator**: 클래스를 변환하고 유효성을 검사하는데 사용됩니다.
 
-11. **RxJS**: 비동기 프로그래밍을 위한 라이브러리입니다.
+11. **테스팅 도구**: Jest(`jest`, `ts-jest`, `@nestjs/testing`, `@types/jest`)와 Supertest(`supertest`, `@types/supertest`)를 사용하여 단위 테스트와 통합 테스트를 수행합니다.
 
-12. **테스팅 도구**: Jest(`jest`, `ts-jest`, `@nestjs/testing`, `@types/jest`)와 Supertest(`supertest`, `@types/supertest`)를 사용하여 단위 테스트와 통합 테스트를 수행합니다.
+12. **Typescript**: 전체 프로젝트는 Typescript로 작성되어 있습니다.
 
-13. **Typescript**: 전체 프로젝트는 Typescript로 작성되어 있습니다.
-
-14. **Linting and Formatting**: ESLint와 Prettier를 통해 코드를 깔끔하게 유지하고 있습니다.
+13. **Linting and Formatting**: ESLint와 Prettier를 통해 코드를 깔끔하게 유지하고 있습니다.
 
 ---
 
